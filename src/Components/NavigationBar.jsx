@@ -1,7 +1,11 @@
 import React from 'react'
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
+import { Link, useLocation } from 'react-router-dom'
 
 const NavigationBar = () => {
+
+    const path = useLocation().pathname;
+
     return (
         <Navbar fluid className="border-b-2" >
             <Navbar.Brand href="/">
@@ -29,13 +33,20 @@ const NavigationBar = () => {
                 <Navbar.Toggle />
             </div>
             <Navbar.Collapse>
-                <Navbar.Link href="#" active>Home</Navbar.Link>
-                <Navbar.Link href="#">About</Navbar.Link>
-                <Navbar.Link href="#">Services</Navbar.Link>
-                <Navbar.Link href="#">Pricing</Navbar.Link>
-                <Navbar.Link href="#">Contact</Navbar.Link>
+                <Link className="text-lg" to="/">
+                    <Navbar.Link as="div" active={path === '/'}>Home</Navbar.Link>
+                </Link>
+                <Link className="text-lg" to="/blogs">
+                    <Navbar.Link as="div" active={path === '/blogs'}>Blogs</Navbar.Link>
+                </Link>
+                <Link className="text-lg" to="/about">
+                    <Navbar.Link as="div" active={path === '/about'}>About</Navbar.Link>
+                </Link>
+                <Link className="text-lg" to="/contact">
+                    <Navbar.Link as="div" active={path === '/contact'}>Contact Us</Navbar.Link>
+                </Link>
             </Navbar.Collapse>
-            
+
         </Navbar>
     );
 }

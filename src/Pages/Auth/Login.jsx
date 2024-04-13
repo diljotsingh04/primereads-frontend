@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
     return (
-        <div className="flex justify-center items-center min-h-[80vh] flex-col md:flex-row">
-            <div className="w-[50%] flex justify-center flex-col md:ml-44">
+        <div className="flex justify-center items-center min-h-[80vh] flex-col md:flex-row md:mx-20">
+            <div className="w-[50%] flex justify-center flex-col">
                 <div className="text-5xl">Prime<span className="text-blue-600">Reads</span></div>
                 <div className="text-2xl">Login Now to read recent blogs</div>
             </div>
             <div className="w-[50%]">
-                <div className="border border-gray-800 rounded-xl md:mr-72">
+                <div className="border border-gray-800 rounded-xl">
                     <form className="p-3 flex md:max-w-md flex-col gap-4 md:p-8">
                         <div>
                             <div>

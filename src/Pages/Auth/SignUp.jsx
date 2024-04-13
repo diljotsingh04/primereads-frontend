@@ -1,48 +1,92 @@
-import React from 'react'
-import { Button, Checkbox, Label, TextInput } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { useState } from 'react'
+import { Button, Checkbox, Label, TextInput, Alert } from "flowbite-react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios"
 
 const SignUp = () => {
 
-   const handleSubmit = (e) =>{
+   const navigate = useNavigate();
+
+   const [signupData, setSignUpData] = useState({});
+   const [repeatPass, setRepeatPass] = useState("");
+   const [failureMessage, setFailureMessage] = useState(null);
+
+   const handleChange = (e) => {
+      setSignUpData({ ...signupData, [e.target.id]: e.target.value })
+   }
+
+   const handleSubmit = async (e) => {
       e.preventDefault();
+      // if (signupData.password !== repeatPass) {
+      //    return alert("both passwords are different")
+      // }
+
+      try {
+         const createUser = await axios.post('http://localhost:3000/auth/signup',
+            signupData,
+            {
+               headers: {
+                  'Content-Type': 'application/json',
+               },
+               withCredentials: true
+            }
+         );
+         
+         console.log(JSON.stringify(createUser.data))
+         console.log(JSON.stringify(createUser))
+
+         if(!createUser.data.success){
+            setFailureMessage(createUser.data.message);
+         }
+         else{
+            setFailureMessage(null);
+            navigate('/blogs')
+         }
+
+      }
+      catch (e) {
+         console.log(e)
+      }
    }
 
    return (
-      <div className="flex justify-center items-center min-h-[80vh] flex-col md:flex-row">
-         <div className="w-[50%] flex justify-center flex-col md:ml-44">
+      <div className="flex justify-center items-center min-h-[80vh] flex-col md:flex-row md:mx-20">
+         <div className="w-[50%] flex justify-center flex-col">
             <div className="text-4xl md:text-5xl">Prime<span className="text-blue-600">Reads</span></div>
             <div className="text-base md:text-2xl">Signup Now to get 10 tokens free</div>
          </div>
          <div className="w-[50%]">
-            <div className="border border-gray-800 rounded-xl md:mr-72">
+            <div className="border border-gray-800 rounded-xl">
                <form className="p-3 flex md:max-w-md flex-col gap-4 md:p-8" onSubmit={handleSubmit}>
+               {failureMessage && <Alert color="failure">
+                  <span className="font-medium">Alert!</span> {failureMessage}
+               </Alert>}
                   <div>
                      <div className="w-[100%]">
                         <div className="mb-2 block">
                            <Label htmlFor="name" value="Your name" />
                         </div>
-                        <TextInput id="name" type="text" placeholder="Enter your name" required shadow />
+                        <TextInput onChange={handleChange} id="name" type="text" placeholder="Enter your name" required shadow />
                      </div>
                      <div>
                         <div className="mb-2 block">
-                           <Label htmlFor="email2" value="Your email" />
+                           <Label htmlFor="email" value="Your email" />
                         </div>
-                        <TextInput id="email2" type="email" placeholder="Enter your password" required shadow />
+                        <TextInput onChange={handleChange} id="email" type="email" placeholder="Enter your password" required shadow />
                      </div>
                      <div>
                         <div className="mb-2 block">
-                           <Label htmlFor="password2" value="Your password" />
+                           <Label htmlFor="password" value="Your password" />
                         </div>
-                        <TextInput id="password2" type="password" placeholder="Enter your password" required shadow />
+                        <TextInput onChange={handleChange} id="password" type="password" placeholder="Enter your password" required shadow />
                      </div>
                      <div>
                         <div className="mb-2 block">
                            <Label htmlFor="repeat-password" value="Repeat password" />
                         </div>
-                        <TextInput id="repeat-password" type="password" placeholder="Confirm password" required shadow />
+                        <TextInput onChange={(e) => setRepeatPass(e.target.value)} id="repeat-password" type="password" placeholder="Confirm password" required shadow />
                      </div>
-                     <Button className="bg-blue-600 mt-4 enabled:hover:bg-blue-700 md:w-[100%]" type="submit">Register new account</Button>
+                     <Button className="bg-blue-600 mt-4 enabled:hover:bg-blue-700 w-[100%]" type="submit">Register new account</Button>
                      <div className="flex items-center">
                         <Label htmlFor="agree" className="flex">
                            Already have an acccount&nbsp;

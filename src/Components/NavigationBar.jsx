@@ -1,11 +1,13 @@
 import React from 'react';
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeUser } from '../Redux/Slices/userSlice';
 import axios from 'axios';
 
 const NavigationBar = () => {
+
+    const user = useSelector((state) => state.user);
 
     const path = useLocation().pathname;
     const navigate = useNavigate();
@@ -34,7 +36,7 @@ const NavigationBar = () => {
                 <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">Prime<span className="text-2xl font-semibold text-blue-600">Reads</span></span>
             </Navbar.Brand>
             <div className="flex md:order-2">
-                <Dropdown
+            {user.id && <Dropdown
                     arrowIcon={false}
                     inline
                     label={
@@ -50,8 +52,8 @@ const NavigationBar = () => {
                     <Dropdown.Item>Earnings</Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item onClick={handleLogout}>Log out</Dropdown.Item>
-                </Dropdown>
-                <Navbar.Toggle />
+                </Dropdown>}
+            <Navbar.Toggle />
             </div>
             <Navbar.Collapse>
                 <Link className="text-lg" to="/">

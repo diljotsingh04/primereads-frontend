@@ -31,8 +31,6 @@ const Login = () => {
                 }
             );
 
-            console.log(JSON.stringify(loginUser.data))
-
             if (!loginUser.data.success) {
                 setFailureMessage(loginUser.data.message);
             }

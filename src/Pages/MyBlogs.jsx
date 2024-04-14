@@ -17,8 +17,6 @@ const MyBlogs = () => {
           withCredentials: true
         }
       );
-
-      console.log(getResult.data);
     }
 
     fetchData();

@@ -34,8 +34,6 @@ const SignUp = () => {
                withCredentials: true
             }
          );
-         
-         console.log(createUser.data)
 
 
          if(!createUser.data.success){

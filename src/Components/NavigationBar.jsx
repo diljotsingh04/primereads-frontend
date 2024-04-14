@@ -1,10 +1,31 @@
-import React from 'react'
+import React from 'react';
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { removeUser } from '../Redux/Slices/userSlice';
+import axios from 'axios';
 
 const NavigationBar = () => {
 
     const path = useLocation().pathname;
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const handleLogout = async() => {
+        const logoutUser = await axios.get('http://localhost:3000/auth/logout',
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                withCredentials: true
+            }
+        );
+
+        if(logoutUser.data.success){
+            dispatch(removeUser());
+            navigate('/login');
+        }
+    }
 
     return (
         <Navbar fluid className="border-b-2" >
@@ -28,7 +49,7 @@ const NavigationBar = () => {
                     <Dropdown.Item>Settings</Dropdown.Item>
                     <Dropdown.Item>Earnings</Dropdown.Item>
                     <Dropdown.Divider />
-                    <Dropdown.Item>Sign out</Dropdown.Item>
+                    <Dropdown.Item onClick={handleLogout}>Log out</Dropdown.Item>
                 </Dropdown>
                 <Navbar.Toggle />
             </div>

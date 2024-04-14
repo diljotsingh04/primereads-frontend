@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
+import {useSelector} from 'react-redux'
 import axios from 'axios'
 
 const MyBlogs = () => {
+
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
 
@@ -24,7 +27,8 @@ const MyBlogs = () => {
 
   return (
     <div>
-      My Blogs
+      {user.name}
+      {user.userImage}
     </div>
   )
 }

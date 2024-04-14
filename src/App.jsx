@@ -7,6 +7,7 @@ import MyBlogs from "./Pages/MyBlogs";
 import Contact from "./Pages/Contact";
 import SignUp from "./Pages/Auth/SignUp";
 import Login from "./Pages/Auth/Login";
+import ClearCookie from "./ToBeDeletedLater/ClearCookie";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
                     <Route path='/contact' element={<Contact />}/>
                     <Route path='/signup' element={<SignUp />}/>
                     <Route path='/login' element={<Login />}/>
+                    <Route path='/clearcookie' element={<ClearCookie />}/>
                 </Routes>
             </BrowserRouter>
         </>

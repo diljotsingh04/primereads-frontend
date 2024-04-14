@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { Button, Checkbox, Label, TextInput, Alert } from "flowbite-react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios"
+import { useDispatch } from 'react-redux';
+import { createuser } from '../../Redux/Slices/userSlice';
+import axios from "axios";
 
 const SignUp = () => {
 
    const navigate = useNavigate();
+   const dispatch = useDispatch();
 
    const [signupData, setSignUpData] = useState({});
    const [repeatPass, setRepeatPass] = useState("");
@@ -32,31 +35,32 @@ const SignUp = () => {
             }
          );
          
-         console.log(JSON.stringify(createUser.data))
-         console.log(JSON.stringify(createUser))
+         console.log(createUser.data)
+
 
          if(!createUser.data.success){
             setFailureMessage(createUser.data.message);
          }
          else{
             setFailureMessage(null);
+            dispatch(createuser(createUser.data));
             navigate('/blogs')
          }
 
       }
       catch (e) {
-         console.log(e)
+         setFailureMessage(`Failed to Signup ${e}`)
       }
    }
 
    return (
-      <div className="flex justify-center items-center min-h-[80vh] flex-col md:flex-row md:mx-20">
+      <div className="flex justify-center items-center min-h-[80vh] flex-col md:flex-row md:mx-20 gap-5">
          <div className="w-[50%] flex justify-center flex-col">
             <div className="text-4xl md:text-5xl">Prime<span className="text-blue-600">Reads</span></div>
             <div className="text-base md:text-2xl">Signup Now to get 10 tokens free</div>
          </div>
          <div className="w-[50%]">
-            <div className="border border-gray-800 rounded-xl">
+            <div className="border border-gray-800 rounded-xl md:w-96">
                <form className="p-3 flex md:max-w-md flex-col gap-4 md:p-8" onSubmit={handleSubmit}>
                {failureMessage && <Alert color="failure">
                   <span className="font-medium">Alert!</span> {failureMessage}
@@ -72,7 +76,7 @@ const SignUp = () => {
                         <div className="mb-2 block">
                            <Label htmlFor="email" value="Your email" />
                         </div>
-                        <TextInput onChange={handleChange} id="email" type="email" placeholder="Enter your password" required shadow />
+                        <TextInput onChange={handleChange} id="email" type="email" placeholder="Enter your email" required shadow />
                      </div>
                      <div>
                         <div className="mb-2 block">

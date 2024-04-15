@@ -3,6 +3,7 @@ import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeUser } from '../Redux/Slices/userSlice';
+import { FaLongArrowAltRight } from "react-icons/fa";
 import axios from 'axios';
 
 const NavigationBar = () => {
@@ -13,7 +14,7 @@ const NavigationBar = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const handleLogout = async() => {
+    const handleLogout = async () => {
         const logoutUser = await axios.get('http://localhost:3000/auth/logout',
             {
                 headers: {
@@ -23,7 +24,7 @@ const NavigationBar = () => {
             }
         );
 
-        if(logoutUser.data.success){
+        if (logoutUser.data.success) {
             dispatch(removeUser());
             navigate('/login');
         }
@@ -36,24 +37,29 @@ const NavigationBar = () => {
                 <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">Prime<span className="text-2xl font-semibold text-blue-600">Reads</span></span>
             </Navbar.Brand>
             <div className="flex md:order-2">
-            {user.id && <Dropdown
+                {user.id ? <Dropdown
                     arrowIcon={false}
                     inline
                     label={
-                        <Avatar alt="User settings" img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnfAxGV-fZxGL9elM_hQ2tp7skLeSwMyUiwo4lMm1zyA&s" rounded />
+                        <Avatar alt="User settings" img={user.userImage} rounded />
                     }
                 >
                     <Dropdown.Header>
-                        <span className="block text-sm">Dummy name</span>
-                        <span className="block truncate text-sm font-medium">name@example.com</span>
+                        <span className="block text-sm">{user.name}</span>
+                        <span className="block truncate text-sm font-medium">{user.email}</span>
                     </Dropdown.Header>
                     <Dropdown.Item>Dashboard</Dropdown.Item>
-                    <Dropdown.Item>Settings</Dropdown.Item>
-                    <Dropdown.Item>Earnings</Dropdown.Item>
+                    <Dropdown.Item>Add Balance</Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item onClick={handleLogout}>Log out</Dropdown.Item>
-                </Dropdown>}
-            <Navbar.Toggle />
+                </Dropdown>
+                :
+                <div className="border rounded-lg bg-blue-600 text-white hover:bg-blue-700">
+                    <Link className="flex items-center m-1 text-lg font-normal block text-white dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" to="/signup">
+                        Signin&nbsp;<FaLongArrowAltRight />
+                    </Link>
+                </div>}
+                <Navbar.Toggle />
             </div>
             <Navbar.Collapse>
                 <Link className="text-lg" to="/">

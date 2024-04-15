@@ -9,17 +9,17 @@ const MyBlogs = () => {
   useEffect(() => {
 
     const fetchData = async () => {
-      const getResult = await axios.get('http://localhost:3000/getcookie',
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          withCredentials: true
-        }
-      );
+      // const getResult = await axios.get('http://localhost:3000/getcookie',
+      //   {
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //     withCredentials: true
+      //   }
+      // );
     }
 
-    fetchData();
+    // fetchData();
   }, [])
 
 

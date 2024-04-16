@@ -26,7 +26,7 @@ const NavigationBar = () => {
 
         if (logoutUser.data.success) {
             dispatch(removeUser());
-            navigate('/login');
+            navigate('/signup');
         }
     }
 

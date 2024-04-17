@@ -1,20 +1,25 @@
 import React from 'react'
 
-const BlogContainer = ({blog}) => {
+const BlogContainer = ({ blog }) => {
+
+    const unlockButtonHandler = (id) => {
+        console.log(id)
+    }
+
     return (
         <div className="border border-black mx-3 mb-3 h-[24rem] w-[20rem] rounded-lg overflow-auto md:w-[80%] md:h-[15rem] md:flex">
             {/* image */}
-            <div className="h-[45%] md:h-40 md:h-[100%] md:w-[60rem]">
-                <img className="h-full w-full object-cover" src="https://i.stack.imgur.com/mw2Lz.png" />
+            <div className="h-[45%] md:h-40 md:h-[100%] md:w-[300px] md:min-w-[250px]">
+                <img className="h-full w-full object-cover" src={blog.image} />
             </div>
             {/* title */}
             <div className="md:flex md:justify-center md:flex-col">
                 <div className="font-bold mt-2 mx-2 text-lg text-center leading-5 line-clamp-2 md:text-start">
-                    This is the title of Blog of the website whcih contains all information fadskfalfdkjk
+                    {blog.title}
                 </div>
                 {/* description */}
                 <div className="text-sm mt-1 mx-2 text-center line-clamp-4 text-justify">
-                    This is the description of website. This is the description of website. . This is the description of website. . This is the description of website.. This is the description of website.This is the des cription of website. This is the descriptio n of website,
+                    {blog.content}
                 </div>
                 {/* hashtag */}
                 <div className="flex justify-center items-center text-sm mt-2 mx-2 md:justify-start">
@@ -35,7 +40,7 @@ const BlogContainer = ({blog}) => {
                     </div>
                     {/* uplock button */}
                     <div>
-                        <button className="border border-black rounded-lg px-2 bg-blue-500 text-white">Unlock: 1 token</button>
+                        <button onClick={() => unlockButtonHandler(blog._id)} className="border border-black rounded-lg px-2 bg-blue-500 text-white">Unlock: 1 token</button>
                     </div>
                 </div>
             </div>

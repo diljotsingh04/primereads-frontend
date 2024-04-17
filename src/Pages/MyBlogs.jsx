@@ -5,21 +5,32 @@ import BlogContainer from '../Components/BlogContainer';
 const MyBlogs = () => {
 
     const [blogs, setBlogs] = useState(null);
+    const [errorMessge, seterrorMessge] = useState(null);
 
-    console.log(blogs)
     useEffect(() => {
 
         const fetchData = async () => {
-            const getResult = await axios.post('http://localhost:3000/posts/getpost',
-                {},
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    withCredentials: true
+            try {
+                const getResult = await axios.post('http://localhost:3000/posts/getpost?order=asc',
+                    {},
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        withCredentials: true
+                    }
+                );
+
+                if (getResult.data.success) {
+                    setBlogs(getResult.data.postData);
                 }
-            );
-            setBlogs(getResult.data);
+                else {
+                    seterrorMessge("Signin or login to see blogs")
+                }
+            }
+            catch (e) {
+                seterrorMessge("Error fetching the data")
+            }
         }
 
         fetchData();
@@ -31,12 +42,17 @@ const MyBlogs = () => {
             <div className="flex justify-center text-3xl mt-4 font-bold">Blogs</div>
             {blogs ?
                 (blogs && <div className="flex justify-center mx-4 my-7 gap-2 flex-wrap md:flex-col md:items-center">
-                    {blogs.postData.map(blog => <BlogContainer key={blog._id} blog={blog} />)}
+                    {blogs.map(blog => <BlogContainer key={blog._id} blog={blog} />)}
                 </div>)
-            :
-            (<div>
-                Loading...
-            </div>)
+                :
+                (<div>
+                    <div>
+                        {!errorMessge && <div> Loading...</div>}
+                    </div>
+                    <div>
+                        {errorMessge}
+                    </div>
+                </div>)
             }
         </>
     )

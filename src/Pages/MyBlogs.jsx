@@ -1,35 +1,44 @@
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react';
 import axios from 'axios'
 import BlogContainer from '../Components/BlogContainer';
 
 const MyBlogs = () => {
 
-    const user = useSelector((state) => state.user);
+    const [blogs, setBlogs] = useState(null);
 
+    console.log(blogs)
     useEffect(() => {
 
         const fetchData = async () => {
-            // const getResult = await axios.get('http://localhost:3000/getcookie',
-            //   {
-            //     headers: {
-            //       'Content-Type': 'application/json',
-            //     },
-            //     withCredentials: true
-            //   }
-            // );
+            const getResult = await axios.post('http://localhost:3000/posts/getpost',
+                {},
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    withCredentials: true
+                }
+            );
+            setBlogs(getResult.data);
         }
 
-        // fetchData();
+        fetchData();
     }, [])
 
 
     return (
-        <div className="flex justify-center mx-6 my-9">
-            <BlogContainer />
-            <BlogContainer />
-            <BlogContainer />
-        </div>
+        <>
+            <div className="flex justify-center text-3xl mt-4 font-bold">Blogs</div>
+            {blogs ?
+                (blogs && <div className="flex justify-center mx-4 my-7 gap-2 flex-wrap md:flex-col md:items-center">
+                    {blogs.postData.map(blog => <BlogContainer key={blog._id} blog={blog} />)}
+                </div>)
+            :
+            (<div>
+                Loading...
+            </div>)
+            }
+        </>
     )
 }
 

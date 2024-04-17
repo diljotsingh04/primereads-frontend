@@ -8,6 +8,7 @@ import Contact from "./Pages/Contact";
 import SignUp from "./Pages/Auth/SignUp";
 import Login from "./Pages/Auth/Login";
 import ClearCookie from "./ToBeDeletedLater/ClearCookie";
+import DetailedBlog from "./Pages/DetailedBlog";
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
                     <Route path='/signup' element={<SignUp />}/>
                     <Route path='/login' element={<Login />}/>
                     <Route path='/clearcookie' element={<ClearCookie />}/>
+                    <Route path='/blog/:blogId' element={<DetailedBlog />}/>
                 </Routes>
             </BrowserRouter>
         </>

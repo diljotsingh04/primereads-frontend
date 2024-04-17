@@ -1,9 +1,10 @@
-import React from 'react'
+import {useNavigate} from 'react-router-dom'
 
 const BlogContainer = ({ blog }) => {
+    const navigate = useNavigate();
 
-    const unlockButtonHandler = (id) => {
-        console.log(id)
+    const readMoreHandler = (id) => {
+        navigate(`/blog/${id}`);
     }
 
     return (
@@ -40,7 +41,7 @@ const BlogContainer = ({ blog }) => {
                     </div>
                     {/* uplock button */}
                     <div>
-                        <button onClick={() => unlockButtonHandler(blog._id)} className="border border-black rounded-lg px-2 bg-blue-500 text-white">Unlock: 1 token</button>
+                        <button onClick={() => readMoreHandler(blog._id)} className="border border-black rounded-lg px-2 bg-blue-500 text-white">Read More</button>
                     </div>
                 </div>
             </div>

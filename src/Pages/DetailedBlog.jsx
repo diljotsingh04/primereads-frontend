@@ -10,8 +10,6 @@ const DetailedBlog = () => {
     const [blog, setBlog] = useState(null);
     const [errorMessge, seterrorMessge] = useState(null);
 
-    console.log(blog)
-
     useEffect(() => {
 
         const fetchData = async () => {

@@ -26,7 +26,6 @@ const MyBlogs = () => {
 
                 if (getResult.data.success) {
                     setBlogs(getResult.data.postData);
-                    console.log(getResult.data)
                     setTotalBlogs(getResult.data.totalPosts)
                 }
                 else {

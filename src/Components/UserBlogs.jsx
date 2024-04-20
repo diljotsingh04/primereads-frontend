@@ -75,7 +75,8 @@ const UserBlogs = () => {
             {blogs ?
                 (
                     <>
-                        {blogs && <div className="flex justify-center mx-4 mt-7 gap-2 flex-wrap md:flex-col md:items-center">
+                        {blogs && blogs.length === 0 ? <div className="flex justify-center items-center h-[70vh]">You haven't any blog yet</div>:
+                        blogs && <div className="flex justify-center mx-4 mt-7 gap-2 flex-wrap md:flex-col md:items-center">
                             {blogs.map(blog => <BlogContainer key={blog._id} blog={blog} />)}
                         </div>
                         }
@@ -85,7 +86,7 @@ const UserBlogs = () => {
                     </>
                 )
                 :
-                (<div>
+                (<div className="flex justify-center items-center h-[70vh]">
                     <div>
                         {!errorMessge && <div> Loading...</div>}
                     </div>

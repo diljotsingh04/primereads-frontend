@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { createuser } from '../../Redux/Slices/userSlice';
 import axios from "axios";
+import OAuth from './OAuth';
 
 const SignUp = () => {
 
@@ -52,7 +53,7 @@ const SignUp = () => {
    }
 
    return (
-      <div className="flex justify-center items-center min-h-[80vh] flex-col md:flex-row md:mx-20 gap-5">
+      <div className="mt-[5rem] flex justify-center items-center min-h-[80vh] flex-col md:flex-row md:mx-20 gap-5">
          <div className="w-[50%] flex justify-center flex-col">
             <div className="text-4xl md:text-5xl">Prime<span className="text-blue-600">Reads</span></div>
             <div className="text-base md:text-2xl">Signup Now to get 10 tokens free</div>
@@ -89,6 +90,7 @@ const SignUp = () => {
                         <TextInput onChange={(e) => setRepeatPass(e.target.value)} id="repeat-password" type="password" placeholder="Confirm password" required shadow />
                      </div>
                      <Button className="bg-blue-600 mt-4 enabled:hover:bg-blue-700 w-[100%]" type="submit">Register new account</Button>
+                     <OAuth setFailureMessage={setFailureMessage}/>
                      <div className="flex items-center">
                         <Label htmlFor="agree" className="flex">
                            Already have an acccount&nbsp;

@@ -49,6 +49,7 @@ const NavigationBar = () => {
                         <span className="block truncate text-sm font-medium">{user.email}</span>
                     </Dropdown.Header>
                     <Dropdown.Item onClick={() => navigate("/dashboard?tab=myblogs")}>Dashboard</Dropdown.Item>
+                    <Dropdown.Item onClick={() => navigate("/dashboard?tab=profile")}>Profile</Dropdown.Item>
                     <Dropdown.Item>Add Balance</Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item onClick={handleLogout}>Log out</Dropdown.Item>

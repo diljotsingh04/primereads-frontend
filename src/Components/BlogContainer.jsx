@@ -10,7 +10,7 @@ const BlogContainer = ({ blog }) => {
     return (
         <div className="border border-black mx-3 mb-3 h-[24rem] w-[20rem] rounded-lg overflow-auto md:w-[80%] md:h-[15rem] md:flex">
             {/* image */}
-            <div className="h-[45%] md:h-40 md:h-[100%] md:w-[300px] md:min-w-[250px]">
+            <div className="h-[45%] md:h-[100%] md:w-[300px] md:min-w-[250px]">
                 <img className="h-full w-full object-cover" src={blog.image} />
             </div>
             {/* title */}

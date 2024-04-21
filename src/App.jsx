@@ -9,6 +9,7 @@ import SignUp from "./Pages/Auth/SignUp";
 import Login from "./Pages/Auth/Login";
 import ClearCookie from "./ToBeDeletedLater/ClearCookie";
 import DetailedBlog from "./Pages/DetailedBlog";
+import ProtectedRoute from "./Utils/ProtectedRoute";
 
 function App() {
 
@@ -18,14 +19,16 @@ function App() {
             <Navbar />
                 <Routes>
                     <Route path='/' element={<Home />}/>
-                    <Route path='/about' element={<About />}/>
-                    <Route path='/dashboard' element={<Dashboard />}/>
-                    <Route path='/blogs' element={<MyBlogs />}/>
-                    <Route path='/contact' element={<Contact />}/>
-                    <Route path='/signup' element={<SignUp />}/>
                     <Route path='/login' element={<Login />}/>
-                    <Route path='/clearcookie' element={<ClearCookie />}/>
-                    <Route path='/blog/:blogId' element={<DetailedBlog />}/>
+                    <Route path='/signup' element={<SignUp />}/>
+                    <Route path='/about' element={<About />}/>
+                    <Route path='/contact' element={<Contact />}/>
+                    <Route path='/blogs' element={<MyBlogs />}/>
+                    <Route element={<ProtectedRoute/>}>
+                        <Route path='/dashboard' element={<Dashboard />}/>
+                        <Route path='/blog/:blogId' element={<DetailedBlog />}/>
+                    </Route>
+                    {/* <Route path='/clearcookie' element={<ClearCookie />}/> */}
                 </Routes>
             </BrowserRouter>
         </>

@@ -3,7 +3,8 @@ import { Button, Checkbox, Label, TextInput, Alert } from "flowbite-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { createuser } from '../../Redux/Slices/userSlice';
-import axios from "axios"
+import axios from "axios";
+import OAuth from './OAuth';
 
 const Login = () => {
 
@@ -72,6 +73,7 @@ const Login = () => {
                                 <TextInput onChange={handleChange} id="password" type="password" placeholder="Enter your password" required shadow />
                             </div>
                             <Button className="bg-blue-600 mt-4 enabled:hover:bg-blue-700 w-[100%]" type="submit">Login</Button>
+                            <OAuth setFailureMessage={setFailureMessage}/>
                             <div className="flex items-center">
                                 <Label htmlFor="agree" className="flex">
                                     Create new account&nbsp;

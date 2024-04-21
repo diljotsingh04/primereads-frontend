@@ -23,6 +23,11 @@ const SideBar = () => {
                             My Blogs
                         </Sidebar.Item>
                     </Link>
+                    <Link to="/dashboard?tab=create-blog">
+                        <Sidebar.Item icon={FaBookReader} active={tab === 'create-blog'} as="div">
+                            Create Blog
+                        </Sidebar.Item>
+                    </Link>
                     <Sidebar.Item href="#" icon={FaSignOutAlt}>
                         Logout
                     </Sidebar.Item>

@@ -80,7 +80,7 @@ const UserBlogs = () => {
                             {blogs.map(blog => <BlogContainer key={blog._id} blog={blog} />)}
                         </div>
                         }
-                        <div className="flex justify-center mb-3">
+                        <div className="flex justify-center mb-4">
                             {blogs.length != totalBlogs && <button onClick={handleShowMore} >Show more</button>}
                         </div>
                     </>

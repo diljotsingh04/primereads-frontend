@@ -9,8 +9,8 @@ import 'react-circular-progressbar/dist/styles.css';
 
 const Profile = () => {
     const curUser = useSelector(state => state.user);
-    const [imageFileUrl, setImageFileUrl] = useState(null);
     const [imageFile, setimageFile] = useState(null);
+    const [imageFileUrl, setImageFileUrl] = useState(null);
     const [imageFileUploadingProgress, setImageFileUploadingProgress] = useState(null)
     const [imageFileUploadingError, setImageFileUploadingError] = useState(null);
     const filePickerRef = useRef();

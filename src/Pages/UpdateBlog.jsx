@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Button, TextInput, Label, Alert } from "flowbite-react";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -11,7 +11,6 @@ import axios from 'axios';
 const CreateBlog = () => {
 
     const { blogId } = useParams();
-    
 
     const toolbarOptions = [
         ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -39,6 +38,58 @@ const CreateBlog = () => {
     }
 
     const [blogData, setblogData] = useState({ title: null, hashtags: [], image: null, content: "" });
+
+    const [getFetchedData, setFetchedData] = useState(null);
+
+    const fetchData = useMemo(() => async () => {
+        try {
+            const getResult = await axios.post(`http://localhost:3000/posts/getpost?postId=${blogId}`,
+                {},
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    withCredentials: true
+                }
+            );
+            if (getResult.data.success) {
+                const getData = getResult.data.postData[0];
+                setFetchedData(getData);
+            }
+            else {
+                setFormSubmitionError("Signin or login to see blogs")
+            }
+        }
+        catch (e) {
+            console.log(e)
+            setFormSubmitionError("Error fetching the data")
+        }
+    }, [blogId])
+
+    useEffect(() => {
+        fetchData()
+    }, [blogId]);
+
+    const [title, settitle] = useState(null)
+    const [hashtags, sethashtags] = useState([]);
+    const [content, setContent] = useState(null);
+    const [image, setimage] = useState(null)
+
+    console.log(blogId, getFetchedData);
+    
+    useEffect(() => {
+        if(getFetchedData){
+            console.log("getfetched", getFetchedData)
+            settitle(getFetchedData.title);
+            sethashtags(getFetchedData.hashtags);
+            setimage(getFetchedData.image)
+            setContent(getFetchedData.content);
+        }
+
+    }, [getFetchedData]);
+
+    console.log(content)
+
     const [formValid, setFormValid] = useState(false);
     const [formSubmitionError, setFormSubmitionError] = useState(null);
     const [sucessMessge, setsucessMessge] = useState(null)
@@ -49,35 +100,6 @@ const CreateBlog = () => {
     const [imageFileUploadingError, setImageFileUploadingError] = useState(null);
     const [uploadingStart, setUploadingStart] = useState(false)
 
-    console.log(blogData)
-
-    useEffect(() => {
-
-        const fetchData = async () => {
-            try {
-                const getResult = await axios.post(`http://localhost:3000/posts/getpost?postId=${blogId}`,
-                    {},
-                    {
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        withCredentials: true
-                    }
-                );
-                if (getResult.data.success) {
-                    setblogData(getResult.data.postData[0]);
-                }
-                else {
-                    setFormSubmitionError("Signin or login to see blogs")
-                }
-            }
-            catch (e) {
-                setFormSubmitionError("Error fetching the data")
-            }
-        }
-
-        fetchData();
-    }, [blogId]);
 
     const handleChange = (e) => {
         setblogData({ ...blogData, [e.target.id]: e.target.value });
@@ -123,64 +145,26 @@ const CreateBlog = () => {
         )
     }
 
-    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        setFormSubmitionError(null);
-
-        if (blogData.title === "") {
-            return setFormSubmitionError("Please enter your title");
-        }
-        if (blogData.hashtags.length === 0) {
-            return setFormSubmitionError("Please enter your hashtags");
-        }
-        if (blogData.image === null) {
-            return setFormSubmitionError("Please select and image");
-        }
-        if (blogData.content.length < 20) {
-            return setFormSubmitionError("Content should be of minimum 20 words");
-        }
-
-        try {
-            const createBlog = await axios.post('http://localhost:3000/posts/addblog',
-                blogData,
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    withCredentials: true
-                }
-            );
-
-
-            if (!createBlog.data.success) {
-                setFormSubmitionError(createBlog.data.message);
-            }
-            else {
-                setFormSubmitionError(null);
-                setsucessMessge("Blog published successfully");
-            }
-
-        }
-        catch (e) {
-            setFormSubmitionError(`Failed to publish blog`)
-        }
+        
 
     }
 
+    
 
     return (
-        <div className="flex flex-col h-[120vh] mt-[5rem]">
-            <div className="text-3xl font-bold text-center">Edit Blog</div>
-            <div className="mx-20 mt-4">
+        <div className="flex flex-col m-5 w-full h-[120vh] mt-[5rem]">
+            <div className="text-3xl font-bold text-center">Create Blog</div>
+            <div className="ml-20 mt-4">
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <div className="mb-2 block z-0">
+                        <div className="mb-2 block">
                             <Label htmlFor="title" value="Your title" />
                         </div>
-                        <TextInput id="title" type="text" onChange={handleChange} placeholder="Enter the title of blog" defaultValue={blogData.title} required />
+                        <TextInput id="title" defaultValue={title} type="text" onChange={handleChange} placeholder="Enter the title of blog" required />
                     </div>
                     <div>
                         <div className="mb-2 block mt-3">
@@ -191,9 +175,8 @@ const CreateBlog = () => {
                             name="fruits"
                             placeHolder="Enter your hashtags"
                             id="hashtags"
-                            value={blogData.hashtags}
+                            value={hashtags}
                         />
-                        {/* <TextInput id="hashtags" type="text" onChange={handleChange} placeholder="Enter the title of blog" required /> */}
                     </div>
                     <div className=" mt-3">
                         <div className="mb-2 block mt-3">
@@ -204,7 +187,7 @@ const CreateBlog = () => {
                                 <input type="file" accept="image/*" onChange={(e) => setfile(e.target.files[0])} />
                                 <Button className=" bg-blue-600 enabled:hover:bg-blue-700 w-[8rem]" onClick={handleUploadImage} disabled={imageFile === null}>{uploadingStart ? `${imageFileUploadingProgress} %` : "Upload Image"}</Button>
                             </div>
-                            {(imageFileUrl|| blogData.image) && <img className="border border-black mt-4 h-80 w-full object-cover " src={blogData.image || imageFileUrl} alt="" />}
+                            {(image || imageFileUrl) && <img className="border border-black mt-4 h-80 w-full object-cover " src={image || imageFileUrl} alt="" />}
                         </div>
                     </div>
                     {imageFileUploadingError && <Alert className="mt-3" color="failure">
@@ -214,7 +197,7 @@ const CreateBlog = () => {
                         <div className="mb-2 block mt-3">
                             <Label htmlFor="content" value="Your content" />
                         </div>
-                        <ReactQuill className="h-72" modules={module} theme="snow" id="content" onChange={(value) => { setblogData({ ...blogData, content: value })}} value={blogData.content} placeholder="Write Something..." />
+                        <ReactQuill className="h-72" modules={module} theme="snow" id="content" onChange={(value) => { setblogData({ ...blogData, content: value }) }} placeholder="Write Something..." />
                     </div>
                     <div className=" my-[5rem]">
                         {formSubmitionError && <Alert className="my-3" color="failure">
@@ -233,7 +216,7 @@ const CreateBlog = () => {
                             </Alert>
                         )}
 
-                        <Button className="bg-blue-600 enabled:hover:bg-blue-700 w-[100%]" type="submit" >Update Blog</Button>
+                        <Button className="bg-blue-600 enabled:hover:bg-blue-700 w-[100%]" type="submit" >Publish Blog</Button>
                     </div>
                 </form>
             </div>

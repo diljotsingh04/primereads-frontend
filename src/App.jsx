@@ -11,6 +11,8 @@ import ClearCookie from "./ToBeDeletedLater/ClearCookie";
 import DetailedBlog from "./Pages/DetailedBlog";
 import ProtectedRoute from "./Utils/ProtectedRoute";
 import UpdateBlog from "./Pages/UpdateBlog";
+import UpdBlg from "./Pages/UpdBlg";
+import EditBlog from "./Pages/EditBlog";
 
 function App() {
 
@@ -28,7 +30,9 @@ function App() {
                     <Route element={<ProtectedRoute/>}>
                         <Route path='/dashboard' element={<Dashboard />}/>
                         <Route path='/blog/:blogId' element={<DetailedBlog />}/>
-                        <Route path='/blog/edit/:blogId' element={<UpdateBlog />}/>
+                        {/* <Route path='/blog/testingedit/:blogId' element={<UpdateBlog />}/> */}
+                        {/* <Route path='/blog/editi/:postId' element={<UpdBlg />}/> */}
+                        <Route path='/blog/edit/:postId' element={<EditBlog />}/>
                     </Route>
                     {/* <Route path='/clearcookie' element={<ClearCookie />}/> */}
                 </Routes>

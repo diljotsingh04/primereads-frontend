@@ -1,6 +1,6 @@
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
-const BlogContainer = ({ blog }) => {
+const BlogContainer = ({ blog, showEdit }) => {
     const navigate = useNavigate();
 
     const readMoreHandler = (id) => {
@@ -8,7 +8,7 @@ const BlogContainer = ({ blog }) => {
     }
 
     return (
-        <div className="border border-black mx-3 mb-3 h-[24rem] w-[20rem] rounded-lg overflow-auto md:w-[80%] md:h-[15rem] md:flex">
+        <div className={`border border-black mx-3 mb-3 ${showEdit !== true ? "h-[23rem]" : "h-[25rem]"} w-[20rem] rounded-lg overflow-auto md:w-[80%] md:h-[15rem] md:flex`}>
             {/* image */}
             <div className="h-[45%] md:h-[100%] md:w-[300px] md:min-w-[250px]">
                 <img className="h-full w-full object-cover" src={blog.image} />
@@ -44,6 +44,9 @@ const BlogContainer = ({ blog }) => {
                         <button onClick={() => readMoreHandler(blog._id)} className="border border-black rounded-lg px-2 bg-blue-500 text-white">Read More</button>
                     </div>
                 </div>
+                {showEdit && <div className="mx-4">
+                    <button onClick={()=> navigate(`/blog/edit/${blog._id}`)} className="border w-full mt-2 border-black rounded-lg px-2 bg-black text-white">Edit Blog</button>
+                </div>}
             </div>
         </div>
     )

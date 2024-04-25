@@ -36,7 +36,11 @@ const NavigationBar = () => {
                 {/* <img src="/favicon.svg" className   ="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" /> */}
                 <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">Prime<span className="text-2xl font-semibold text-blue-600">Reads</span></span>
             </Navbar.Brand>
-            <div className="flex md:order-2">
+            <div className="flex items-center md:order-2 gap-2">
+                <div className="hidden border border-black rounded-md p-1 md:block">
+                    <span>Tokens:</span>
+                    <span>100</span>
+                </div>
                 {user.id ? <Dropdown
                     arrowIcon={false}
                     inline
@@ -48,6 +52,10 @@ const NavigationBar = () => {
                         <span className="block text-sm">{user.name}</span>
                         <span className="block truncate text-sm font-medium">{user.email}</span>
                     </Dropdown.Header>
+                    <Dropdown.Header className="md:hidden">
+                        <span className="font-bold">Tokens:</span>
+                        <span>100</span>
+                    </Dropdown.Header>
                     <Dropdown.Item onClick={() => navigate("/dashboard?tab=profile")}>Profile</Dropdown.Item>
                     <Dropdown.Item onClick={() => navigate("/dashboard?tab=myblogs")}>Dashboard</Dropdown.Item>
                     <Dropdown.Item onClick={() => navigate("/dashboard?tab=create-blog")}>Create Blog</Dropdown.Item>
@@ -55,12 +63,12 @@ const NavigationBar = () => {
                     <Dropdown.Divider />
                     <Dropdown.Item onClick={handleLogout}>Log out</Dropdown.Item>
                 </Dropdown>
-                :
-                <div className="border rounded-lg bg-blue-600 text-white hover:bg-blue-700">
-                    <Link className="flex items-center m-1 text-lg font-normal block text-white dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" to="/signup">
-                        Signin&nbsp;<FaLongArrowAltRight />
-                    </Link>
-                </div>}
+                    :
+                    <div className="border rounded-lg bg-blue-600 text-white hover:bg-blue-700">
+                        <Link className="flex items-center m-1 text-lg font-normal block text-white dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" to="/signup">
+                            Signin&nbsp;<FaLongArrowAltRight />
+                        </Link>
+                    </div>}
                 <Navbar.Toggle />
             </div>
             <Navbar.Collapse>

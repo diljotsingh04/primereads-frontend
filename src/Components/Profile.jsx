@@ -66,7 +66,6 @@ const Profile = () => {
         )
     }
 
-
     return (
         <form className=" mb-16">
             <div className="flex justify-center flex-col items-center">

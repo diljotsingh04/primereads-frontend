@@ -82,7 +82,7 @@ const MyBlogs = () => {
                     </>
                 )
                 :
-                (<div>
+                (<div className="flex justify-center items-center h-[80vh]">
                     <div>
                         {!errorMessge && <div> Loading...</div>}
                     </div>

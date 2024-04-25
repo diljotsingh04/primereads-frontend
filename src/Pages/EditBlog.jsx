@@ -52,7 +52,6 @@ const EditBlog = () => {
                 );
                 if (getResult.data.success) {
                     const getData = getResult.data.postData[0];
-                    console.log(getData)
                     setBlogData(getData);
                 }
                 else {
@@ -60,7 +59,6 @@ const EditBlog = () => {
                 }
             }
             catch (e) {
-                console.log(e)
                 setFormSubmitionError("Error fetching the data")
             }
         }
@@ -123,7 +121,45 @@ const EditBlog = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("submitted", blogData);
+        setFormSubmitionError(null);
+
+        if (blogData.title === "") {
+            return setFormSubmitionError("Please enter your title");
+        }
+        if (blogData.hashtags.length === 0) {
+            return setFormSubmitionError("Please enter your hashtags");
+        }
+        if (blogData.image === null) {
+            return setFormSubmitionError("Please select and image");
+        }
+        if (blogData.content.length < 20) {
+            return setFormSubmitionError("Content should be of minimum 20 words");
+        }
+
+        try {
+            const editBlog = await axios.post('http://localhost:3000/posts/editblog',
+                blogData,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    withCredentials: true
+                }
+            );
+            
+
+            if (!editBlog.data.success) {
+                setFormSubmitionError(editBlog.data.message);
+            }
+            else {
+                setFormSubmitionError(null);
+                setsucessMessge("Blog published successfully");
+            }
+
+        }
+        catch (e) {
+            setFormSubmitionError(`Failed to publish blog ${e}`)
+        }
     }
 
 
@@ -133,12 +169,11 @@ const EditBlog = () => {
             <div>Loading..</div>
         )
     }
-    console.log(blogData)
 
     return (
         <div className="flex flex-col m-5 w-full h-[120vh] mt-[5rem]">
             <div className="text-3xl font-bold text-center">Create Blog</div>
-            <div className="ml-20 mt-4">
+            <div className=" mx-14">
                 <form onSubmit={handleSubmit}>
                     <div>
                         <div className="mb-2 block">

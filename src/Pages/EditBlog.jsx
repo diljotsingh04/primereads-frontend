@@ -7,11 +7,14 @@ import { app } from "../Firebase/firebase";
 import { TagsInput } from "react-tag-input-component";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from 'axios';
+import { useSelector } from 'react-redux'
 
 const EditBlog = () => {
 
     const { postId } = useParams();
     const [blogData, setBlogData] = useState(null);
+    const curUser = useSelector(state => state.user);
+    const [unAuthorized, setUnAuthorized] = useState(false);
 
     const toolbarOptions = [
         ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -52,7 +55,12 @@ const EditBlog = () => {
                 );
                 if (getResult.data.success) {
                     const getData = getResult.data.postData[0];
-                    setBlogData(getData);
+                    if(curUser.id !== getData.refTo){
+                        setUnAuthorized(true);
+                    }
+                    else{
+                        setBlogData(getData);
+                    }
                 }
                 else {
                     setFormSubmitionError("Signin or login to see blogs")
@@ -162,11 +170,15 @@ const EditBlog = () => {
         }
     }
 
-
+    if (unAuthorized) {
+        return (
+            <div className="flex justify-center items-center h-[100vh]">You are not allowed to edit this blog</div>
+        )
+    }
 
     if (!blogData) {
         return (
-            <div>Loading..</div>
+            <div className="flex justify-center items-center h-[100vh]">Loading...</div>
         )
     }
 

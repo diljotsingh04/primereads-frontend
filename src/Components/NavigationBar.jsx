@@ -36,7 +36,7 @@ const NavigationBar = () => {
                 {/* <img src="/favicon.svg" className   ="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" /> */}
                 <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">Prime<span className="text-2xl font-semibold text-blue-600">Reads</span></span>
             </Navbar.Brand>
-            <div className="flex md:order-2 z-10">
+            <div className="flex md:order-2">
                 {user.id ? <Dropdown
                     arrowIcon={false}
                     inline

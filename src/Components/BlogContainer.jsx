@@ -1,10 +1,17 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
+import Hashtag from './Hashtag';
+import { dateSimplifier } from '../Functions/datetimesimplifier';
 
 const BlogContainer = ({ blog, showEdit }) => {
     const navigate = useNavigate();
 
     const readMoreHandler = (id) => {
         navigate(`/blog/${id}`);
+    }
+
+    const strippedContent = (content) => {
+
+        return content.replace(/(<([^>]+)>)/gi, '');
     }
 
     return (
@@ -20,24 +27,23 @@ const BlogContainer = ({ blog, showEdit }) => {
                 </div>
                 {/* description */}
                 <div className="text-sm mt-1 mx-2 text-center line-clamp-4 text-justify">
-                    {blog.content}
+                    {strippedContent(blog.content)}
                 </div>
                 {/* hashtag */}
                 <div className="flex justify-center items-center text-sm mt-2 mx-2 md:justify-start">
                     <span className="font-bold">HashTags:&nbsp;</span>
                     <div className="flex justify-center gap-1">
-                        <div className="text-xs items-center border border-black rounded-lg px-3">
-                            #Ai
-                        </div>
-                        <div className="text-xs items-center border border-black rounded-lg px-3 break-all">
-                            #machine learning
-                        </div>
+                        {blog.hashtags.length >= 1 && <Hashtag value={blog.hashtags[0]} />}
+                        {blog.hashtags.length >= 2 && <Hashtag value={blog.hashtags[1]} />}
+                        {blog.hashtags.length >= 3 && <Link to={`/blog/${blog._id}`} ><div className="text-xs ml-[-10px] text-gray-500 items-center px-3">
+                            ...more
+                        </div> </Link>}
                     </div>
                 </div>
                 {/* date  */}
                 <div className="flex flex-row mx-2 justify-between mt-2 md:items-end">
                     <div className="text-base">
-                        16-April-2024
+                        {dateSimplifier(blog.updatedAt)}
                     </div>
                     {/* uplock button */}
                     <div>
@@ -45,7 +51,7 @@ const BlogContainer = ({ blog, showEdit }) => {
                     </div>
                 </div>
                 {showEdit && <div className="mx-4">
-                    <button onClick={()=> navigate(`/blog/edit/${blog._id}`)} className="border w-full mt-2 border-black rounded-lg px-2 bg-black text-white">Edit Blog</button>
+                    <button onClick={() => navigate(`/blog/edit/${blog._id}`)} className="border w-full mt-2 border-black rounded-lg px-2 bg-black text-white">Edit Blog</button>
                 </div>}
             </div>
         </div>

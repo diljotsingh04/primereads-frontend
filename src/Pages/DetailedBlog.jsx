@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { dateTimeSimplifier } from '../Functions/datetimesimplifier';
+import Hashtag from '../Components/Hashtag';
 
 const DetailedBlog = () => {
 
@@ -54,16 +55,19 @@ const DetailedBlog = () => {
                 <div className="flex justify-center gap-[25rem]">
                     {/* date */}
                     <div>
+                    <span className="font-bold">Date:&nbsp;</span>
                         {dateTimeSimplifier(blog.updatedAt)}
                     </div>
                     {/* author */}
                     <div>
+                    <span className="font-bold">Author:&nbsp;</span>
                         {blog.author}
                     </div>
                 </div>
                 {/* hashtags */}
-                <div className="flex justify-center mt-5">
-                    {blog.hashtags}
+                <div className="flex justify-center mt-5 gap-1">
+                    <span className="font-bold">HashTags:&nbsp;</span>
+                    {blog.hashtags.map((value, index) => <Hashtag key={index} value={value} />)}
                 </div>
                 {/* content */}
                 <div className="flex justify-center mt-5">

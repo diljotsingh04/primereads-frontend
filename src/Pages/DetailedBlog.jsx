@@ -12,10 +12,9 @@ const DetailedBlog = () => {
     const [errorMessge, seterrorMessge] = useState(null);
 
     useEffect(() => {
-
         const fetchData = async () => {
             try {
-                const getResult = await axios.post(`http://localhost:3000/posts/getpost?postId=${blogId}`,
+                const getResult = await axios.post(`http://localhost:3000/posts/readblog?postId=${blogId}`,
                     {},
                     {
                         headers: {
@@ -25,10 +24,11 @@ const DetailedBlog = () => {
                     }
                 );
                 if (getResult.data.success) {
-                    setBlog(getResult.data.postData[0]);
+                    seterrorMessge(null)
+                    setBlog(getResult.data.postData);
                 }
                 else {
-                    seterrorMessge("Signin or login to see blogs")
+                    seterrorMessge(getResult.data.message)
                 }
             }
             catch (e) {
@@ -39,6 +39,17 @@ const DetailedBlog = () => {
         fetchData();
     }, [blogId])
 
+    if(errorMessge){
+        return (
+            <div className="flex justify-center items-center h-screen">{errorMessge}</div>
+        )
+    }
+
+    if (!blog) {
+        return (
+            <div className="flex justify-center items-center h-[100vh]">Loading...</div>
+        )
+    }
 
     return (
 

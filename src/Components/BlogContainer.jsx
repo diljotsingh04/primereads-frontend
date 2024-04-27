@@ -1,6 +1,7 @@
 import { useNavigate, Link } from 'react-router-dom'
 import Hashtag from './Hashtag';
 import { dateSimplifier } from '../Functions/datetimesimplifier';
+import Swal from 'sweetalert2'
 
 const BlogContainer = ({ blog, showEdit }) => {
     const navigate = useNavigate();
@@ -9,8 +10,27 @@ const BlogContainer = ({ blog, showEdit }) => {
         navigate(`/blog/${id}`);
     }
 
-    const strippedContent = (content) => {
+    const handleUnlock = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "One Token will be deducted from your balance",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3dc410",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, sure!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Unlocked!",
+                    text: "Your blog has been unlocked.",
+                    icon: "success"
+                });
+            }
+        });
+    }
 
+    const strippedContent = (content) => {
         return content.replace(/(<([^>]+)>)/gi, '');
     }
 
@@ -46,8 +66,11 @@ const BlogContainer = ({ blog, showEdit }) => {
                         {dateSimplifier(blog.updatedAt)}
                     </div>
                     {/* uplock button */}
-                    <div>
+                    {/* <div>
                         <button onClick={() => readMoreHandler(blog._id)} className="border border-black rounded-lg px-2 bg-blue-500 text-white">Read More</button>
+                    </div> */}
+                    <div>
+                        <button onClick={() => { (blog.unlocked || blog.isOwner) ? readMoreHandler(blog._id) : handleUnlock(blog._id) }} className="border border-black rounded-lg px-2 bg-blue-500 text-white">{(blog.unlocked || blog.isOwner) ? "Read More" : "UnlockBlog"}</button>
                     </div>
                 </div>
                 {showEdit && <div className="mx-4">

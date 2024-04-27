@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios'
 import BlogContainer from '../Components/BlogContainer';
+import { Button } from "flowbite-react";
 
 const MyBlogs = () => {
 
@@ -26,7 +27,7 @@ const MyBlogs = () => {
 
                 if (getResult.data.success) {
                     setBlogs(getResult.data.postData);
-                    setTotalBlogs(getResult.data.totalPosts)
+                    setTotalBlogs(getResult.data.totalPosts);
                 }
                 else {
                     seterrorMessge("Signin or login to see blogs")
@@ -69,6 +70,7 @@ const MyBlogs = () => {
     return (
         <>
             <div className="flex justify-center text-3xl mt-4 font-bold mt-[5rem]">Blogs</div>
+            <button className="hidden absolute right-5 top-[81px] w-[125px] h-10 bg-blue-500 text-white rounded-md">Unlocked Blogs</button>
             {blogs ?
                 (
                     <>

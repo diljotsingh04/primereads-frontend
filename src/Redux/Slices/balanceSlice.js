@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    amount: 10
+    amount: null
 }
 
 export const amountSlice = createSlice({
@@ -11,9 +11,15 @@ export const amountSlice = createSlice({
         setBalance: (state, action) => {
             state.amount = action.payload
         },
+        incrementBalance: (state, action) => {
+            state.amount += action.payload
+        },
+        decrementBalance: (state, action) => {
+            state.amount -= action.payload;
+        },
     },
 })
 
-export const { setBalance } = amountSlice.actions
+export const { setBalance, incrementBalance, decrementBalance } = amountSlice.actions
 
 export default amountSlice.reducer

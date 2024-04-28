@@ -75,10 +75,10 @@ const NavigationBar = () => {
 
                 {user.id ?
                     <>
-                        <div className="hidden border border-black rounded-md p-1 md:block">
+                        <Link to="/tokens/addbalance"><div className="hidden border border-black rounded-md p-1 md:block">
                             <span>Tokens:</span>
                             <span>{token.amount}</span>
-                        </div>
+                        </div></Link>
 
                         <Dropdown
                             arrowIcon={false}
@@ -98,7 +98,7 @@ const NavigationBar = () => {
                             <Dropdown.Item onClick={() => navigate("/dashboard?tab=profile")}>Profile</Dropdown.Item>
                             <Dropdown.Item onClick={() => navigate("/dashboard?tab=myblogs")}>Dashboard</Dropdown.Item>
                             <Dropdown.Item onClick={() => navigate("/dashboard?tab=create-blog")}>Create Blog</Dropdown.Item>
-                            <Dropdown.Item>Add Balance</Dropdown.Item>
+                            <Dropdown.Item onClick={() => navigate("/tokens/addbalance")}>Add Balance</Dropdown.Item>
                             <Dropdown.Divider />
                             <Dropdown.Item onClick={handleLogout}>Log out</Dropdown.Item>
                         </Dropdown>

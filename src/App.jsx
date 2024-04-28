@@ -11,6 +11,8 @@ import ClearCookie from "./ToBeDeletedLater/ClearCookie";
 import DetailedBlog from "./Pages/DetailedBlog";
 import ProtectedRoute from "./Utils/ProtectedRoute";
 import EditBlog from "./Pages/EditBlog";
+import UnlockedBlogs from "./Pages/UnlockedBlogs";
+import AddBalance from "./Pages/AddBalance";
 
 function App() {
 
@@ -29,6 +31,8 @@ function App() {
                         <Route path='/dashboard' element={<Dashboard />}/>
                         <Route path='/blog/:blogId' element={<DetailedBlog />}/>
                         <Route path='/blog/edit/:postId' element={<EditBlog />}/>
+                        <Route path='/blogs/unlocked/' element={<UnlockedBlogs />}/>
+                        <Route path='/tokens/addbalance/' element={<AddBalance />}/>
                     </Route>
                     {/* <Route path='/clearcookie' element={<ClearCookie />}/> */}
                 </Routes>

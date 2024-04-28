@@ -1,34 +1,78 @@
 import { useNavigate, Link } from 'react-router-dom'
 import Hashtag from './Hashtag';
 import { dateSimplifier } from '../Functions/datetimesimplifier';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios'
+import { decrementBalance } from '../Redux/Slices/balanceSlice';
 
-const BlogContainer = ({ blog, showEdit }) => {
+const BlogContainer = ({ blog, showEdit, unlocked }) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const balance = useSelector(state => state.balance);
 
     const readMoreHandler = (id) => {
         navigate(`/blog/${id}`);
     }
 
-    const handleUnlock = (id) => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "One Token will be deducted from your balance",
-            icon: "question",
-            showCancelButton: true,
-            confirmButtonColor: "#3dc410",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, sure!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: "Unlocked!",
-                    text: "Your blog has been unlocked.",
-                    icon: "success"
-                });
-            }
-        });
+    const handleUnlock = async (id) => {
+        if (balance.amount <= 0) {
+            Swal.fire({
+                title: "Insufficient Balance!",
+                text: "Add your balance to continue",
+                icon: "error"
+            });
+        }
+        else {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "One Token will be deducted from your balance",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#3dc410",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, sure!"
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        const unlockBlog = await axios.post(`http://localhost:3000/auth/unlockpost/${id}`,
+                            {},
+                            {
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                withCredentials: true
+                            }
+                        );
+                        if (unlockBlog.data.success) {
+                            Swal.fire({
+                                title: "Unlocked!",
+                                text: "Your blog has been unlocked.",
+                                icon: "success"
+                            });
+                            dispatch(decrementBalance(1));
+                            navigate('/blogs/unlocked');
+                        }
+                        else {
+                            Swal.fire({
+                                title: "Failed!",
+                                text: `${unlockBlog.data.message}`,
+                                icon: "error"
+                            });
+                        }
+                    }
+                    catch (error) {
+                        Swal.fire({
+                            title: "Failed!",
+                            text: `Failed to unlock blog`,
+                            icon: "error"
+                        });
+                    }
+                }
+            });
+        }
     }
+
 
     const strippedContent = (content) => {
         return content.replace(/(<([^>]+)>)/gi, '');

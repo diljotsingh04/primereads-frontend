@@ -7,7 +7,7 @@ const AddBalance = () => {
     const curUser = useSelector(state => state.user);
 
     const [copied, setCopied] = useState(false);
-    const [value, setvalue] = useState(import.meta.env.VITE_BACKEND_URL + "/refer/" + curUser.id)
+    const [value, setvalue] = useState("http://localhost:5173" + "/refer/" + curUser.id)
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(value);

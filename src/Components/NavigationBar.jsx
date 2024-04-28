@@ -44,7 +44,7 @@ const NavigationBar = () => {
             fetchData();
         }
 
-    }, [])
+    }, [user.id])
 
 
     const handleLogout = async () => {

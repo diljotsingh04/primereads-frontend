@@ -31,7 +31,7 @@ const SideBar = () => {
     }
 
     return (
-        <Sidebar aria-label="Default sidebar example" className="w-screen  md:w-64">
+        <Sidebar aria-label="Default sidebar example" className="w-screen md:w-64 md:fixed md:left-0 md:top-[3rem] md:h-full">
             <Sidebar.Items>
                 <Sidebar.ItemGroup>
                     <Link to="/dashboard?tab=profile">

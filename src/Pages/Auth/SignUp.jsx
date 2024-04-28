@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button, Checkbox, Label, TextInput, Alert } from "flowbite-react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createuser } from '../../Redux/Slices/userSlice';
 import axios from "axios";
 import OAuth from './OAuth';
@@ -10,6 +10,15 @@ const SignUp = () => {
 
    const navigate = useNavigate();
    const dispatch = useDispatch();
+
+   // check if user already logged in
+   const curUser = useSelector(state => state.user);
+
+   useEffect(() => {
+      if(curUser.id){
+         navigate('/blogs')
+      }
+   }, []);
 
    const [signupData, setSignUpData] = useState({});
    const [repeatPass, setRepeatPass] = useState("");
@@ -21,9 +30,9 @@ const SignUp = () => {
 
    const handleSubmit = async (e) => {
       e.preventDefault();
-      // if (signupData.password !== repeatPass) {
-      //    return alert("both passwords are different")
-      // }
+      if (signupData.password !== repeatPass) {
+         return alert("both passwords are different")
+      }
 
       try {
          const createUser = await axios.post('http://localhost:3000/auth/signup',
@@ -37,10 +46,10 @@ const SignUp = () => {
          );
 
 
-         if(!createUser.data.success){
+         if (!createUser.data.success) {
             setFailureMessage(createUser.data.message);
          }
-         else{
+         else {
             setFailureMessage(null);
             dispatch(createuser(createUser.data));
             navigate('/blogs')
@@ -61,9 +70,9 @@ const SignUp = () => {
          <div className="w-[50%]">
             <div className="border border-gray-800 rounded-xl md:w-96">
                <form className="p-3 flex md:max-w-md flex-col gap-4 md:p-8" onSubmit={handleSubmit}>
-               {failureMessage && <Alert color="failure">
-                  <span className="font-medium">Alert!</span> {failureMessage}
-               </Alert>}
+                  {failureMessage && <Alert color="failure">
+                     <span className="font-medium">Alert!</span> {failureMessage}
+                  </Alert>}
                   <div>
                      <div className="w-[100%]">
                         <div className="mb-2 block">
@@ -90,7 +99,7 @@ const SignUp = () => {
                         <TextInput onChange={(e) => setRepeatPass(e.target.value)} id="repeat-password" type="password" placeholder="Confirm password" required shadow />
                      </div>
                      <Button className="bg-blue-600 mt-4 enabled:hover:bg-blue-700 w-[100%]" type="submit">Register new account</Button>
-                     <OAuth setFailureMessage={setFailureMessage}/>
+                     <OAuth setFailureMessage={setFailureMessage} />
                      <div className="flex items-center">
                         <Label htmlFor="agree" className="flex">
                            Already have an acccount&nbsp;

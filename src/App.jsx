@@ -13,6 +13,7 @@ import ProtectedRoute from "./Utils/ProtectedRoute";
 import EditBlog from "./Pages/EditBlog";
 import UnlockedBlogs from "./Pages/UnlockedBlogs";
 import AddBalance from "./Pages/AddBalance";
+import Refer from "./Pages/Auth/Refer";
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
                     <Route path='/about' element={<About />}/>
                     <Route path='/contact' element={<Contact />}/>
                     <Route path='/blogs' element={<MyBlogs />}/>
+                    <Route path='/refer/:prevUserId' element={<Refer />}/>
                     <Route element={<ProtectedRoute/>}>
                         <Route path='/dashboard' element={<Dashboard />}/>
                         <Route path='/blog/:blogId' element={<DetailedBlog />}/>

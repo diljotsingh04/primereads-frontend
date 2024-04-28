@@ -11,8 +11,8 @@ const Dashboard = () => {
 
     return (
         <div className="flex flex-col mt-[3.5rem] md:h-screen md:flex-row">
-            <SideBar />
-            <div className="flex justify-center md:w-[75%] mt-[1rem]">
+            <SideBar/>
+            <div className="flex justify-center md:ml-[17rem] md:w-[75%] mt-[1rem]">
                 {curTab === 'profile' ? <Profile /> : curTab === 'myblogs' ? <UserBlogs /> : curTab === 'create-blog' ? <CreateBlog /> : <Profile />}
             </div>
         </div>

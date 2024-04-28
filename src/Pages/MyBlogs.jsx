@@ -2,18 +2,17 @@ import { useEffect, useState } from 'react';
 import axios from 'axios'
 import BlogContainer from '../Components/BlogContainer';
 import { Button } from "flowbite-react";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const MyBlogs = () => {
 
     const [blogs, setBlogs] = useState(null);
     const [errorMessge, seterrorMessge] = useState(null);
     const [totalBlogs, setTotalBlogs] = useState(null);
-
+    const curUser = useSelector(state => state.user);
     
     useEffect(() => {
-        
-
         const fetchData = async () => {
             try {
                 const getResult = await axios.post('http://localhost:3000/posts/getpost',
@@ -71,7 +70,7 @@ const MyBlogs = () => {
     return (
         <>
             <div className="flex justify-center text-3xl mt-4 font-bold mt-[5rem]">Blogs</div>
-            <Link to="/blogs/unlocked" className="flex justify-center items-center absolute right-5 top-[81px] w-[125px] h-10 bg-blue-500 text-white rounded-md">Unlocked Blogs</Link>
+            {curUser.id && <Link to="/blogs/unlocked" className="flex justify-center items-center absolute right-5 top-[81px] w-[125px] h-10 bg-blue-500 text-white rounded-md">Unlocked Blogs</Link>}
             {blogs ?
                 (
                     <>

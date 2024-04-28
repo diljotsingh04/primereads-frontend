@@ -9,9 +9,9 @@ const UnlockedBlogs = () => {
     const [blogs, setBlogs] = useState(null);
     const [errorMessge, seterrorMessge] = useState(null);
 
-    
+
     useEffect(() => {
-        
+
 
         const fetchData = async () => {
             try {
@@ -49,7 +49,11 @@ const UnlockedBlogs = () => {
             {blogs ?
                 (
                     <>
-                        {blogs && <div className="flex justify-center mx-4 mt-7 gap-2 flex-wrap md:flex-col md:items-center">
+                        {blogs.length === 0 ? <div className="flex justify-center items-center h-[80vh]">
+                            You don't have any unlocked blogs yet
+                        </div>
+                        :
+                        blogs && <div className="flex justify-center mx-4 mt-7 gap-2 flex-wrap md:flex-col md:items-center">
                             {blogs.map(blog => <BlogContainer key={blog._id} blog={blog} />)}
                         </div>
                         }

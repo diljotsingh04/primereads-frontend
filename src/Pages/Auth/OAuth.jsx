@@ -35,6 +35,7 @@ const OAuth = ({setFailureMessage}) => {
             }
             else {
                 setFailureMessage(null);
+                
                 dispatch(createuser(res.data));
                 navigate('/blogs')
             }

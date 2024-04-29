@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createuser } from '../../Redux/Slices/userSlice';
 import axios from "axios";
 import OAuth from './OAuth';
+import { incrementBalance } from '../../Redux/Slices/balanceSlice';
 
 const Refer = () => {
 
@@ -52,7 +53,34 @@ const Refer = () => {
             else {
                 setFailureMessage(null);
                 dispatch(createuser(createUser.data));
-                navigate('/blogs')
+                // add bonus tokens to both accounts
+                try {
+                    const addBonus = await axios.put('http://localhost:3000/auth/refer',
+                        {
+                            prevuserid: prevUserId,
+                            curuserid: createUser.data._id
+                        },
+                        {
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            withCredentials: true
+                        }
+                    );
+            
+                    if (!addBonus.data.success) {
+                        setFailureMessage(addBonus.data.message);
+                    }
+                    else{
+                        navigate('/blogs');
+                        dispatch(incrementBalance(10));
+                    }
+                }
+                catch (e) {
+                    console.log(e)
+                    setFailureMessage("Failed to add bonus")
+                }
+                // adding bonus logic ends
             }
 
         }

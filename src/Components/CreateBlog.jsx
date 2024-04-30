@@ -137,8 +137,6 @@ const CreateBlog = () => {
 
     }
 
-    console.log(blogData)
-
     return (
         <div className="flex flex-col m-5 w-full h-[120vh]">
             <div className="text-3xl font-bold text-center">Create Blog</div>

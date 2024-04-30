@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 import { dateTimeSimplifier } from '../Functions/datetimesimplifier';
 import Hashtag from '../Components/Hashtag';
+import { useSelector } from 'react-redux';
 
 const DetailedBlog = () => {
 
     let { blogId } = useParams();
+    const curUser = useSelector(state => state.user);
 
     const [blog, setBlog] = useState(null);
     const [errorMessge, seterrorMessge] = useState(null);
@@ -55,6 +57,7 @@ const DetailedBlog = () => {
 
         blog ?
             <div className="flex justify-center mt-4 flex-col item-center mt-[5rem]">
+                {curUser.id === blog.refTo && <Link to={`/blog/edit/${blog._id}`} className="flex justify-center items-center absolute right-5 top-[125px] w-[125px] h-10 bg-blue-500 text-white rounded-md">Edit Blog</Link>}
                 {/* title */}
                 <div className="flex justify-center text-3xl font-bold">
                     {blog.title}

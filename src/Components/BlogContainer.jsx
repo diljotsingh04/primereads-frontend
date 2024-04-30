@@ -10,6 +10,7 @@ const BlogContainer = ({ blog, showEdit, unlocked }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const balance = useSelector(state => state.balance);
+    const curUser = useSelector(state => state.user);
 
     const readMoreHandler = (id) => {
         navigate(`/blog/${id}`);
@@ -79,14 +80,14 @@ const BlogContainer = ({ blog, showEdit, unlocked }) => {
     }
 
     return (
-        <div className={`border border-black mx-3 mb-3 ${showEdit !== true ? "h-[23rem]" : "h-[25rem]"} w-[20rem] rounded-lg overflow-auto md:w-[80%] md:h-[15rem] md:flex`}>
+        <div className={`border border-black mx-3 mb-3 ${showEdit !== true ? "h-[23rem]" : "h-[25rem]"} w-[20rem] rounded-lg overflow-auto md:w-[80%] md:h-[15rem] md:flex relative`}>
             {/* image */}
             <div className="h-[45%] md:h-[100%] md:w-[300px] md:min-w-[250px]">
                 <img className="h-full w-full object-cover" src={blog.image} />
             </div>
             {/* title */}
             <div className="md:flex md:justify-center md:flex-col">
-                <div className="font-bold mt-2 mx-2 text-lg text-center leading-5 line-clamp-2 md:text-start">
+                <div className="font-bold mt-2 mx-2 text-lg text-center leading-5 line-clamp-1 md:text-start">
                     {blog.title}
                 </div>
                 {/* description */}
@@ -119,7 +120,8 @@ const BlogContainer = ({ blog, showEdit, unlocked }) => {
                 </div>
                 {showEdit && <div className="mx-4">
                     <button onClick={() => navigate(`/blog/edit/${blog._id}`)} className="border w-full mt-2 border-black rounded-lg px-2 bg-black text-white">Edit Blog</button>
-                </div>}
+                </div>} 
+                {curUser.id === blog.refTo && <div className="absolute bottom-0 right-1 text-xs text-gray-500">You are the owner of this blog</div>}
             </div>
         </div>
     )

@@ -8,6 +8,7 @@ import { TagsInput } from "react-tag-input-component";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from 'axios';
 import { useSelector } from 'react-redux'
+import { Footer } from '../Components/Footer';
 
 const EditBlog = () => {
 
@@ -183,9 +184,10 @@ const EditBlog = () => {
     }
 
     return (
-        <div className="flex flex-col m-5 w-full h-[120vh] mt-[5rem]">
+        <>
+        <div className="flex flex-col m-5 w-full h-[120vh] mt-[5rem] pb-10">
             <div className="text-3xl font-bold text-center">Create Blog</div>
-            <div className=" mx-14">
+            <div className="mx-14 px-5">
                 <form onSubmit={handleSubmit}>
                     <div>
                         <div className="mb-2 block">
@@ -205,7 +207,7 @@ const EditBlog = () => {
                             value={blogData.hashtags}
                         />
                     </div>
-                    <div className=" mt-3">
+                    <div className="mt-3">
                         <div className="mb-2 block mt-3">
                             <Label htmlFor="image" value="Choose your image" />
                         </div>
@@ -226,7 +228,7 @@ const EditBlog = () => {
                         </div>
                         <ReactQuill className="h-72" value={blogData.content} modules={module} theme="snow" id="content" onChange={(value) => { setBlogData({ ...blogData, content: value }) }} placeholder="Write Something..." />
                     </div>
-                    <div className=" my-[5rem]">
+                    <div className="my-[5rem]">
                         {formSubmitionError && <Alert className="my-3" color="failure">
                             <span className="font-medium">Alert!</span> {formSubmitionError}
                         </Alert>}
@@ -237,17 +239,21 @@ const EditBlog = () => {
                                         <span className="font-medium">Success!</span> Blog Published Successfully
                                     </div>
                                     <div className="ml-8 border p-[2px] border-black bg-blue-600 text-white rounded-md">
-                                        <Link className="" to="/blogs">See Blog</Link>
+                                        <Link className="px-2 py-1" to="/blogs">See Blog</Link>
                                     </div>
                                 </div>
                             </Alert>
                         )}
-
-                        <Button className="bg-blue-600 enabled:hover:bg-blue-700 w-[100%]" type="submit" >Update Blog</Button>
+                        <Button className="bg-blue-600 enabled:hover:bg-blue-700 w-[100%]" type="submit">Update Blog</Button>
+                        <div className='h-10'></div>
                     </div>
                 </form>
             </div>
         </div>
+        <div className='h-10'></div>
+
+        <Footer />
+        </>
     )
 }
 

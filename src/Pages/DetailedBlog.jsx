@@ -4,6 +4,7 @@ import axios from 'axios'
 import { dateTimeSimplifier } from '../Functions/datetimesimplifier';
 import Hashtag from '../Components/Hashtag';
 import { useSelector } from 'react-redux';
+import { Footer } from '../Components/Footer';
 
 const DetailedBlog = () => {
 
@@ -54,19 +55,20 @@ const DetailedBlog = () => {
     }
 
     return (
-
-        blog ?
-            <div className="flex justify-center mt-4 flex-col item-center mt-[5rem]">
-                {curUser.id === blog.refTo && <Link to={`/blog/edit/${blog._id}`} className="flex justify-center items-center absolute right-5 top-[125px] w-[125px] h-10 bg-blue-500 text-white rounded-md">Edit Blog</Link>}
+        <>
+        
+        {blog ?
+            <div className="flex justify-center flex-col item-center mt-[5rem] mb-10">
+                {curUser.id === blog.refTo && <Link to={`/blog/edit/${blog._id}`} className="flex justify-center items-center absolute right-5 top-[125px] w-[125px] py-2 px-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 hover:ring-1 focus:ring-2">EDIT BLOG</Link>}
                 {/* title */}
-                <div className="flex justify-center text-3xl font-bold">
+                <div className="flex justify-center text-3xl font-bold mt-2 md:mt-8 mb-8 p-3">
                     {blog.title}
                 </div>
                 {/* image */}
-                <div className="flex justify-center">
-                    <img className="h-96 mx-6 object-cover" src={blog.image} alt="blog image" />
+                <div className="flex justify-center mb-5 px-2">
+                    <img className="h-96 mx-6 object-cover rounded-2xl" src={blog.image} alt="blog image" />
                 </div>
-                <div className="flex justify-center gap-[25rem]">
+                <div className="flex justify-center gap-[10rem] md:gap-[25rem] text-md px-2">
                     {/* date */}
                     <div>
                     <span className="font-bold">Date:&nbsp;</span>
@@ -79,18 +81,21 @@ const DetailedBlog = () => {
                     </div>
                 </div>
                 {/* hashtags */}
-                <div className="flex justify-center mt-5 gap-1">
+                <div className="flex justify-center mt-4 gap-1 text-sm">
                     <span className="font-bold">HashTags:&nbsp;</span>
                     {blog.hashtags.map((value, index) => <Hashtag key={index} value={value} />)}
                 </div>
                 {/* content */}
-                <div className="flex justify-center mt-5">
-                    <div className="mx-28 md:w-[50%] text-justify" dangerouslySetInnerHTML={{ __html: blog.content }}></div>
+                <div className="flex justify-center mt-8 text-lg">
+                    <div className="mx-12 md:w-[50%] text-justify" dangerouslySetInnerHTML={{ __html: blog.content }}></div>
                 </div>
             </div>
             :
-            <div>Loading..</div>
+            <div>Loading...</div>
+        }
 
+        <Footer />
+        </>
     )
 }
 

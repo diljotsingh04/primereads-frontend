@@ -140,7 +140,7 @@ const CreateBlog = () => {
     return (
         <div className="flex flex-col m-5 w-full h-[120vh]">
             <div className="text-3xl font-bold text-center">Create Blog</div>
-            <div className="ml-20 mt-4">
+            <div className="ml-auto lg:ml-10 xl:ml-20 mt-4">
                 <form onSubmit={handleSubmit}>
                     <div>
                         <div className="mb-2 block">
@@ -191,11 +191,13 @@ const CreateBlog = () => {
                                         <span className="font-medium">Success!</span> Blog Published Successfully
                                     </div>
                                     <div className="ml-8 border p-[2px] border-black bg-blue-600 text-white rounded-md">
-                                        <Link className="" to="/blogs">See Blog</Link>
+                                        <Link className="p-2" to="/blogs">See Blog</Link>
                                     </div>
                                 </div>
                             </Alert>
                         )}
+
+                        <div className='h-5'></div>
 
                         <Button className="bg-blue-600 enabled:hover:bg-blue-700 w-[100%]" type="submit" >Publish Blog</Button>
                     </div>

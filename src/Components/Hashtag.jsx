@@ -2,7 +2,7 @@ import React from 'react'
 
 const Hashtag = ({value}) => {
     return (
-        <div className="text-xs items-center border border-black rounded-lg px-3">
+        <div className="text-xs items-center border border-black text-blue-800 rounded-full px-3 hover:bg-blue-600 hover:text-white">
             {value}
         </div>
     )

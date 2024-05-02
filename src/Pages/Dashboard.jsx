@@ -3,6 +3,7 @@ import SideBar from "../Components/SideBar";
 import { useSearchParams } from 'react-router-dom';
 import UserBlogs from "../Components/UserBlogs";
 import CreateBlog from "../Components/CreateBlog";
+import { Footer } from '../Components/Footer';
 
 const Dashboard = () => {
 

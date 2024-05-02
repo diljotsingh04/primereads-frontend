@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios'
 import BlogContainer from '../Components/BlogContainer';
-import { Button } from "flowbite-react";
+import { Footer } from "../Components/Footer";
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -69,17 +69,17 @@ const MyBlogs = () => {
 
     return (
         <>
-            <div className="flex justify-center text-3xl mt-4 font-bold mt-[5rem]">Blogs</div>
-            {curUser.id && <Link to="/blogs/unlocked" className="flex justify-center items-center absolute right-5 top-[81px] w-[125px] h-10 bg-blue-500 text-white rounded-md">Unlocked Blogs</Link>}
+            <div className="flex justify-center text-3xl font-bold mt-[6rem]">BLOGS</div>
+            {curUser.id && <Link to="/blogs/unlocked" className="flex justify-center items-center absolute right-5 top-[81px] w-[125px] h-10 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:ring-2">Unlocked Blogs</Link>}
             {blogs ?
                 (
                     <>
-                        {blogs && <div className="flex justify-center mx-4 mt-7 gap-2 flex-wrap md:flex-col md:items-center">
+                        {blogs && <div className="flex justify-center mx-4 mt-8 gap-2 flex-wrap md:flex-col md:items-center">
                             {blogs.map(blog => <BlogContainer key={blog._id} blog={blog} />)}
                         </div>
                         }
-                        <div className="flex justify-center mb-3">
-                            {blogs.length != totalBlogs && <button onClick={handleShowMore} >Show more</button>}
+                        <div className="flex justify-center mt-5 mb-5">
+                            {blogs.length != totalBlogs && <button onClick={handleShowMore} className='border-2 border-black rounded-full px-3 py-0.5 hover:animate-bounce hover:bg-blue-700 hover:border-blue-700 hover:text-white focus:ring-2'>Show more</button>}
                         </div>
                     </>
                 )
@@ -93,6 +93,7 @@ const MyBlogs = () => {
                     </div>
                 </div>)
             }
+            <Footer />
         </>
     )
 }

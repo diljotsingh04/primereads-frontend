@@ -3,6 +3,7 @@ import axios from 'axios'
 import BlogContainer from '../Components/BlogContainer';
 import { Button } from "flowbite-react";
 import { Link } from 'react-router-dom'
+import { Footer } from '../Components/Footer';
 
 const UnlockedBlogs = () => {
 
@@ -43,8 +44,8 @@ const UnlockedBlogs = () => {
 
     return (
         <>
-            <div className="flex justify-center text-3xl mt-4 font-bold mt-[5rem]">Unlocked Blogs</div>
-            <Link to="/blogs" className="flex justify-center items-center absolute right-5 top-[81px] w-[125px] h-10 bg-blue-500 text-white rounded-md">All Blogs</Link>
+            <div className="flex justify-center text-3xl font-bold mt-[5rem]">Unlocked Blogs</div>
+            <Link to="/blogs" className="flex justify-center items-center absolute right-5 top-[81px] w-[125px] h-10 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:ring-2">All Blogs</Link>
             <button className="hidden absolute right-5 top-[81px] w-[125px] h-10 bg-blue-500 text-white rounded-md">Unlocked Blogs</button>
             {blogs ?
                 (
@@ -69,6 +70,8 @@ const UnlockedBlogs = () => {
                     </div>
                 </div>)
             }
+
+            <Footer />
         </>
     )
 }

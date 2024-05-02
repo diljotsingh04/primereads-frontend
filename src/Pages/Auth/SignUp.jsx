@@ -101,8 +101,8 @@ const SignUp = () => {
                      <Button className="bg-blue-600 mt-4 enabled:hover:bg-blue-700 w-[100%]" type="submit">Register new account</Button>
                      <OAuth setFailureMessage={setFailureMessage} />
                      <div className="flex items-center">
-                        <Label htmlFor="agree" className="flex">
-                           Already have an acccount&nbsp;
+                        <Label htmlFor="agree" className="flex mt-2">
+                           Already have an account&nbsp;
                            <Link to="/login" className="text-blue-600 hover:underline">
                               Login
                            </Link>

@@ -80,34 +80,35 @@ const BlogContainer = ({ blog, showEdit, unlocked }) => {
     }
 
     return (
-        <div className={`border border-black mx-3 mb-3 ${showEdit !== true ? "h-[23rem]" : "h-[25rem]"} w-[20rem] rounded-lg overflow-auto md:w-[80%] md:h-[15rem] md:flex relative`}>
+        <div className={`border border-black mx-3 mb-3 ${showEdit !== true ? "h-[23rem]" : "h-[25rem]"} w-[20rem] rounded-lg overflow-hidden md:w-[80%] md:h-[15rem] md:flex relative`}>
             {/* image */}
-            <div className="h-[45%] md:h-[100%] md:w-[300px] md:min-w-[250px]">
+            <div className="h-[45%] md:h-[100%] md:w-[250px] md:min-w-[250px] md:border-r">
                 <img className="h-full w-full object-cover" src={blog.image} />
             </div>
-            {/* title */}
-            <div className="md:flex md:justify-center md:flex-col">
-                <div className="font-bold mt-2 mx-2 text-lg text-center leading-5 line-clamp-1 md:text-start">
+
+            <div className="md:flex md:justify-center md:flex-col w-full">
+                {/* title */}
+                <div className="transform-gpu origin-center md:origin-bottom-left font-bold mt-2 mx-2 text-xl text-center leading-6 line-clamp-1 md:text-start py-1 md:p-1 transition duration-300 hover:scale-105 hover:text-blue-600">
                     {blog.title}
                 </div>
                 {/* description */}
-                <div className="text-sm mt-1 mx-2 text-center line-clamp-4 text-justify">
+                <div className="text-sm mt-1 mx-2 px-3 py-1 md:pr-8 line-clamp-2 text-justify text-gray-600 hover:text-black">
                     {strippedContent(blog.content)}
                 </div>
                 {/* hashtag */}
-                <div className="flex justify-center items-center text-sm mt-2 mx-2 md:justify-start">
+                <div className="flex justify-center items-center text-sm mt-2 mx-2 md:justify-start px-1">
                     <span className="font-bold">HashTags:&nbsp;</span>
                     <div className="flex justify-center gap-1">
                         {blog.hashtags.length >= 1 && <Hashtag value={blog.hashtags[0]} />}
                         {blog.hashtags.length >= 2 && <Hashtag value={blog.hashtags[1]} />}
-                        {blog.hashtags.length >= 3 && <Link to={`/blog/${blog._id}`} ><div className="text-xs ml-[-10px] text-gray-500 items-center px-3">
+                        {blog.hashtags.length >= 3 && <Link to={`/blog/${blog._id}`} ><div className="text-xs ml-[-10px] text-gray-500 items-center px-3 hover:text-black">
                             ...more
                         </div> </Link>}
                     </div>
                 </div>
                 {/* date  */}
-                <div className="flex flex-row mx-2 justify-between mt-2 md:items-end">
-                    <div className="text-base">
+                <div className="flex flex-row mx-2 px-1 justify-between mt-2 md:items-end">
+                    <div className="text-sm">
                         {dateSimplifier(blog.updatedAt)}
                     </div>
                     {/* uplock button */}
@@ -115,13 +116,13 @@ const BlogContainer = ({ blog, showEdit, unlocked }) => {
                         <button onClick={() => readMoreHandler(blog._id)} className="border border-black rounded-lg px-2 bg-blue-500 text-white">Read More</button>
                     </div> */}
                     <div>
-                        <button onClick={() => { (blog.unlocked || blog.isOwner) ? readMoreHandler(blog._id) : handleUnlock(blog._id) }} className="border border-black rounded-lg px-2 bg-blue-500 text-white">{(blog.unlocked || blog.isOwner) ? "Read More" : "UnlockBlog"}</button>
+                        <button onClick={() => { (blog.unlocked || blog.isOwner) ? readMoreHandler(blog._id) : handleUnlock(blog._id) }} className="border border-black rounded-lg py-1 px-2 mx-3 bg-blue-600 text-white hover:bg-blue-700 focus:ring-2">{(blog.unlocked || blog.isOwner) ? "Read More" : "Unlock Blog"}</button>
                     </div>
                 </div>
                 {showEdit && <div className="mx-4">
-                    <button onClick={() => navigate(`/blog/edit/${blog._id}`)} className="border w-full mt-2 border-black rounded-lg px-2 bg-black text-white">Edit Blog</button>
+                    <button onClick={() => navigate(`/blog/edit/${blog._id}`)} className="border py-1 m-2 border-black rounded-lg px-3 bg-gray-900 text-white hover:bg-black hover:ring-1 focus:ring-2">Edit Blog</button>
                 </div>} 
-                {curUser.id === blog.refTo && <div className="absolute bottom-0 right-1 text-xs text-gray-500">You are the owner of this blog</div>}
+                {curUser.id === blog.refTo && <div className="absolute bottom-2 right-3 text-xs text-gray-500">You are the owner of this blog</div>}
             </div>
         </div>
     )

@@ -149,7 +149,7 @@ const Profile = () => {
                     <img className={`border-4 border-gray-400 rounded-full h-36 w-36 object-cover ${imageFileUploadingProgress && imageFileUploadingProgress < 100 && 'opacity-60'} `} 
                     src={imageFileUrl || curUser.userImage} alt="user image" />
 
-                    <div className="text-center text-blue-500 underline">Edit Profile Image</div>
+                    <div className="text-center text-blue-500 underline mt-2">Edit Profile Image</div>
                 </div>
                 <div className="mt-3">
                     {imageFileUploadingError && <Alert color="failure">

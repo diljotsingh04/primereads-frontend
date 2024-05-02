@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { FaCopy, FaRegCopy } from "react-icons/fa";
+import { Footer } from '../Components/Footer';
 
 const AddBalance = () => {
     const curBalance = useSelector(state => state.balance);
@@ -16,17 +17,18 @@ const AddBalance = () => {
     };
 
     return (
+        <>
         <div className="mt-[5rem] flex justify-center flex-col items-center h-[60vh]">
             <div className="text-center">
                 <div className="text-xl">Your current balance is:</div>
             </div>
             <div className="border border-black rounded-md w-48 h-24 flex justify-center items-center mt-4">
-                <div className="font-bold text-xl">Tokens:</div>
+                <pre className="font-bold text-xl">Tokens: </pre>
                 <div className="text-xl">{curBalance.amount}</div>
             </div>
             <div className="my-4 border border-gray w-[80%]"></div>
             <div>
-                <div className=" text-xl">Refer to Earn 10 tokens</div>
+                <div className="text-xl mb-2">Refer to earn 10 Tokens</div>
             </div>
             {/* copyt to clipboard functionality */}
             <div className="w-full max-w-[35rem]">
@@ -56,6 +58,8 @@ const AddBalance = () => {
                 </div>
             </div>
         </div>
+        <Footer />
+        </>
     )
 }
 

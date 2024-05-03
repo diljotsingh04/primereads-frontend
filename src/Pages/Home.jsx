@@ -52,7 +52,7 @@ const Home = () => {
             
             {user.id ? 
                 <div className="text-lg md:text-2xl text-center border-t-2 border-gray-500 pt-2">
-                    Welcome back, <span className='font-bold text-xl md:text-3xl hover:animate-pulse hover:text-blue-700'>{user.name}</span>!
+                    Hello, <span className='font-bold text-xl md:text-3xl hover:animate-pulse hover:text-blue-700'>{user.name}</span>!
                 </div> 
                 : <div className="text-2xl text-center border-t-2 border-gray-500 pt-2"><Link to="/login" className="text-blue-600">LogIn</Link> or <Link to="/signup" className="text-blue-600">SignUp</Link> now to unlock premium blogs!</div>
             }            

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createuser } from '../../Redux/Slices/userSlice';
 import axios from "axios";
 import OAuth from './OAuth';
-import { incrementBalance } from '../../Redux/Slices/balanceSlice';
+import { setBalance } from '../../Redux/Slices/balanceSlice';
 
 const Refer = () => {
 
@@ -72,12 +72,11 @@ const Refer = () => {
                         setFailureMessage(addBonus.data.message);
                     }
                     else{
+                        dispatch(setBalance(20));
                         navigate('/blogs');
-                        dispatch(incrementBalance(10));
                     }
                 }
                 catch (e) {
-                    console.log(e)
                     setFailureMessage("Failed to add bonus")
                 }
                 // adding bonus logic ends
@@ -128,7 +127,7 @@ const Refer = () => {
                                 <TextInput onChange={(e) => setRepeatPass(e.target.value)} id="repeat-password" type="password" placeholder="Confirm password" required shadow />
                             </div>
                             <Button className="bg-blue-600 mt-4 enabled:hover:bg-blue-700 w-[100%]" type="submit">Register new account</Button>
-                            <OAuth setFailureMessage={setFailureMessage}/>
+                            <OAuth setFailureMessage={setFailureMessage} refer={true} prevUserId={prevUserId}/>
                             <div className="flex items-center">
                                 <Label htmlFor="agree" className="flex">
                                     Already have an acccount&nbsp;

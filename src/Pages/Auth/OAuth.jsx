@@ -4,8 +4,9 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { createuser } from '../../Redux/Slices/userSlice';
 import { useNavigate } from "react-router-dom";
+import { setBalance } from '../../Redux/Slices/balanceSlice';
 
-const OAuth = ({setFailureMessage}) => {
+const OAuth = ({setFailureMessage, refer, prevUserId}) => {
     const auth = getAuth(app);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -35,9 +36,42 @@ const OAuth = ({setFailureMessage}) => {
             }
             else {
                 setFailureMessage(null);
-                
                 dispatch(createuser(res.data));
-                navigate('/blogs')
+                // add bonus logic starts
+                if(refer && res.data.newUser){
+                    try {
+                        const addBonus = await axios.put('http://localhost:3000/auth/refer',
+                            {
+                                prevuserid: prevUserId,
+                                curuserid: res.data._id
+                            },
+                            {
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                withCredentials: true
+                            }
+                        );
+                
+                        if (!addBonus.data.success) {
+                            console.log("declined")
+                            setFailureMessage(addBonus.data.message);
+                        }
+                        else{
+                            console.log("token added")
+                            dispatch(setBalance(20));
+                            navigate('/blogs');
+                        }
+                    }
+                    catch (e) {
+                        console.log(e)
+                        setFailureMessage("Failed to add bonus")
+                    }
+                }
+                else{
+                    navigate('/blogs');
+                }
+                // add bonus logic ends
             }
 
         } catch (e) {

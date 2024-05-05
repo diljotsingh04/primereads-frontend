@@ -4,7 +4,8 @@ import { FaCopy, FaRegCopy } from "react-icons/fa";
 import { Footer } from '../Components/Footer';
 import RadioPrice from '../Components/RadioPrice';
 import { Button } from "flowbite-react";
-
+import { loadStripe } from '@stripe/stripe-js';
+import axios from 'axios'
 
 const AddBalance = () => {
     const curBalance = useSelector(state => state.balance);
@@ -38,8 +39,38 @@ const AddBalance = () => {
         setTimeout(() => setCopied(false), 2000);
     };
 
-    const handleBuyNow = () => {
-        console.log(price)
+    const handleBuyNow = async() => {
+        const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUB_KEY);
+
+        const body = {
+            products: [price]
+        }
+        try {
+            const response = await axios.post('http://localhost:3000/auth/stripe-checkout-session',
+                body,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    withCredentials: true
+                }
+            );
+
+            const session = await response.data;
+
+            const result = stripe.redirectToCheckout({
+                sessionId: session.id
+            })
+    
+            if (result.error) {
+                console.log(result.error)
+            }
+
+        }
+        catch (e) {
+            console.log(e)
+            console.log('Error in opening checkout page');
+        }
     }
 
     return (

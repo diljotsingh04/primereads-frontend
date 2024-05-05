@@ -17,6 +17,8 @@ import AddBalance from "./Pages/AddBalance";
 import Refer from "./Pages/Auth/Refer";
 import TermsAndConditions from "./Pages/TermsAndConditions";
 import { useState, useEffect } from "react";
+import Success from "./Pages/Success";
+import Failure from "./Pages/Failure";
 
 function App() {
     const [loading, setLoading] = useState(true);
@@ -52,6 +54,8 @@ function App() {
                                 <Route path='/blog/edit/:postId' element={<EditBlog />}/>
                                 <Route path='/blogs/unlocked/' element={<UnlockedBlogs />}/>
                                 <Route path='/tokens/addbalance/' element={<AddBalance />}/>
+                                <Route path='/success' element={<Success />}/>
+                                <Route path='/failure' element={<Failure />}/>
                             </Route>
                             {/* <Route path='/clearcookie' element={<ClearCookie />}/> */}
                         </Routes>

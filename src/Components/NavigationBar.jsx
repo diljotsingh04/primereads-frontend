@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeUser } from '../Redux/Slices/userSlice';
 import { setBalance } from '../Redux/Slices/balanceSlice';
 import axios from 'axios';
+import ThemeToggler from './LDToggler/ThemeToggler';
 
 const NavigationBar = () => {
 
@@ -71,7 +72,7 @@ const NavigationBar = () => {
             </Navbar.Brand>
             <div className="flex items-center md:order-2 gap-2">
 
-
+                <ThemeToggler />
                 {user.id ?
                     <>
                         <Link to="/tokens/addbalance"><div className="hidden border border-black rounded-md py-1 px-2 md:block">

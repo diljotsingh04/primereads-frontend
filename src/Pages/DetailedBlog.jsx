@@ -5,6 +5,7 @@ import { dateTimeSimplifier } from '../Functions/datetimesimplifier';
 import Hashtag from '../Components/Hashtag';
 import { useSelector } from 'react-redux';
 import { Footer } from '../Components/Footer';
+import Loading from '../Components/Loading';
 
 const DetailedBlog = () => {
 
@@ -42,7 +43,7 @@ const DetailedBlog = () => {
         fetchData();
     }, [blogId])
 
-    if(errorMessge){
+    if (errorMessge) {
         return (
             <div className="flex justify-center items-center h-screen">{errorMessge}</div>
         )
@@ -50,14 +51,13 @@ const DetailedBlog = () => {
 
     if (!blog) {
         return (
-            <div className="flex justify-center items-center h-[100vh]">Loading...</div>
+            <Loading />
         )
     }
 
     return (
         <>
-        
-        {blog ?
+
             <div className="flex justify-center flex-col item-center mt-[5rem] mb-10">
                 {curUser.id === blog.refTo && <Link to={`/blog/edit/${blog._id}`} className="flex justify-center items-center absolute right-5 top-[125px] w-[125px] py-2 px-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 hover:ring-1 focus:ring-2">EDIT BLOG</Link>}
                 {/* title */}
@@ -71,12 +71,12 @@ const DetailedBlog = () => {
                 <div className="flex justify-center gap-[10rem] md:gap-[25rem] text-md px-2">
                     {/* date */}
                     <div>
-                    <span className="font-bold">Date:&nbsp;</span>
+                        <span className="font-bold">Date:&nbsp;</span>
                         {dateTimeSimplifier(blog.updatedAt)}
                     </div>
                     {/* author */}
                     <div>
-                    <span className="font-bold">Author:&nbsp;</span>
+                        <span className="font-bold">Author:&nbsp;</span>
                         {blog.author}
                     </div>
                 </div>
@@ -90,11 +90,9 @@ const DetailedBlog = () => {
                     <div className="mx-12 md:w-[50%] text-justify" dangerouslySetInnerHTML={{ __html: blog.content }}></div>
                 </div>
             </div>
-            :
-            <div>Loading...</div>
         }
 
-        <Footer />
+            <Footer />
         </>
     )
 }

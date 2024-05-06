@@ -4,6 +4,7 @@ import BlogContainer from '../Components/BlogContainer';
 import { Button } from "flowbite-react";
 import { Link } from 'react-router-dom'
 import { Footer } from '../Components/Footer';
+import Loading from '../Components/Loading';
 
 const UnlockedBlogs = () => {
 
@@ -63,7 +64,7 @@ const UnlockedBlogs = () => {
                 :
                 (<div className="flex justify-center items-center h-[80vh]">
                     <div>
-                        {!errorMessge && <div> Loading...</div>}
+                        {!errorMessge && <Loading />}
                     </div>
                     <div>
                         {errorMessge}

@@ -4,14 +4,15 @@ import BlogContainer from '../Components/BlogContainer';
 import { Footer } from "../Components/Footer";
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Loading from '../Components/Loading';
 
 const MyBlogs = () => {
 
     const [blogs, setBlogs] = useState(null);
-    const [errorMessge, seterrorMessge] = useState(null);
+    const [errorMessge, seterrorMessge] = useState(false);
     const [totalBlogs, setTotalBlogs] = useState(null);
     const curUser = useSelector(state => state.user);
-    
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -41,8 +42,8 @@ const MyBlogs = () => {
         fetchData();
     }, [])
 
-    
-    const handleShowMore = async() => {
+
+    const handleShowMore = async () => {
 
         try {
             const getResult = await axios.post(`http://localhost:3000/posts/getpost?startIndex=${blogs.length}`,
@@ -86,7 +87,9 @@ const MyBlogs = () => {
                 :
                 (<div className="flex justify-center items-center h-[80vh]">
                     <div>
-                        {!errorMessge && <div> Loading...</div>}
+                        {!errorMessge &&
+                            <Loading />
+                        }
                     </div>
                     <div>
                         {errorMessge}

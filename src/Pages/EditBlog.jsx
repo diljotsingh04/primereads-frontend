@@ -9,6 +9,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from 'axios';
 import { useSelector } from 'react-redux'
 import { Footer } from '../Components/Footer';
+import Loading from '../Components/Loading';
 
 const EditBlog = () => {
 
@@ -179,7 +180,7 @@ const EditBlog = () => {
 
     if (!blogData) {
         return (
-            <div className="flex justify-center items-center h-[100vh]">Loading...</div>
+            <Loading />
         )
     }
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios'
 import BlogContainer from './BlogContainer';
 import { useSelector } from 'react-redux'
+import Loading from './Loading';
 
 const UserBlogs = () => {
 
@@ -87,7 +88,7 @@ const UserBlogs = () => {
                 :
                 (<div className="flex justify-center items-center h-[70vh]">
                     <div>
-                        {!errorMessge && <div> Loading...</div>}
+                        {!errorMessge && <Loading />}
                     </div>
                     <div>
                         {errorMessge}

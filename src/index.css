@@ -9,3 +9,10 @@
 .ql-editor{
       font-size: 1.05rem;
 }
+.ql-syntax{
+      background-color: #1e293b;
+      margin: 2px;
+      padding: 10px;
+      border-radius: 10px;
+      color: white;
+}

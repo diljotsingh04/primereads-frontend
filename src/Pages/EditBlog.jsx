@@ -253,7 +253,6 @@ const EditBlog = () => {
         </div>
         <div className='h-10'></div>
 
-        <Footer />
         </>
     )
 }

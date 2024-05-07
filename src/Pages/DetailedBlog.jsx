@@ -57,7 +57,7 @@ const DetailedBlog = () => {
 
     return (
         <>
-            <div className="flex justify-center flex-col item-center mt-[5rem] mb-10">
+            <div className="flex justify-center flex-col item-center pt-[5rem] mb-10">
                 {curUser.id === blog.refTo && <Link to={`/blog/edit/${blog._id}`} className="flex justify-center items-center absolute right-5 top-[125px] w-[125px] py-2 px-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 hover:ring-1 focus:ring-2">EDIT BLOG</Link>}
                 {/* title */}
                 <div className="flex justify-center text-3xl font-bold mt-2 md:mt-8 mb-8 p-3">

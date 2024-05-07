@@ -63,7 +63,6 @@ const NavigationBar = () => {
         }
     }   
 
-
     return (
         <Navbar fluid className="border-b-2 fixed w-full top-0 z-50 bg-transparent backdrop-blur-md">
             <Navbar.Brand href="/">
@@ -75,7 +74,7 @@ const NavigationBar = () => {
                 <ThemeToggler />
                 {user.id ?
                     <>
-                        <Link to="/tokens/addbalance"><div className="hidden border border-black rounded-md py-1 px-2 md:block">
+                        <Link to="/tokens/addbalance"><div className="hidden border border-black dark:border-gray-400 rounded-md py-1 px-2 md:block">
                             <span>Tokens: </span>
                             <span>{token.amount}</span>
                         </div></Link>
@@ -105,7 +104,7 @@ const NavigationBar = () => {
                     </>
                     :
                     <div className="border rounded-lg bg-blue-600 text-white hover:bg-blue-700">
-                        <Link className="items-center m-1 px-2 text-lg font-normal block text-white dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white hover:bg-blue-700" to="/signup">
+                        <Link className="items-center m-1 px-2 text-lg font-normal block text-white dark:border-gray-700 dark:text-white  dark:hover:text-white hover:bg-blue-700" to="/signup">
                             Sign In
                         </Link>
                     </div>}
@@ -113,16 +112,16 @@ const NavigationBar = () => {
             </div>
             <Navbar.Collapse>
                 <Link className="transform text-lg transition duration-300 hover:scale-105" to="/">
-                    <Navbar.Link as="div" active={path === '/'}>Home</Navbar.Link>
+                    <Navbar.Link className={`md:hover:text-blue-600`} as="div" active={path === '/'}>Home</Navbar.Link>
                 </Link>
                 <Link className="transform text-lg transition duration-300 hover:scale-105" to="/blogs">
-                    <Navbar.Link as="div" active={path === '/blogs'}>Blogs</Navbar.Link>
+                    <Navbar.Link className={`md:hover:text-blue-600`} as="div" active={path === '/blogs'}>Blogs</Navbar.Link>
                 </Link>
                 <Link className="transform text-lg transition duration-300 hover:scale-105" to="/about">
-                    <Navbar.Link as="div" active={path === '/about'}>About</Navbar.Link>
+                    <Navbar.Link className={`md:hover:text-blue-600`} as="div" active={path === '/about'}>About</Navbar.Link>
                 </Link>
                 <Link className="transform text-lg transition duration-300 hover:scale-105" to="/contact">
-                    <Navbar.Link as="div" active={path === '/contact'}>Contact Us</Navbar.Link>
+                    <Navbar.Link className={`md:hover:text-blue-600`} as="div" active={path === '/contact'}>Contact Us</Navbar.Link>
                 </Link>
             </Navbar.Collapse>
 

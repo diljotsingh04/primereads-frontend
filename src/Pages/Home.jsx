@@ -43,7 +43,7 @@ const Home = () => {
     const user = useSelector((state) => state.user);
 
     return (
-        <div className="mt-[5rem] flex flex-col justify-center items-center min-h-[90vh] gap-3">
+        <div className="pt-[5rem] flex flex-col justify-center items-center min-h-[90vh] gap-3">
 
             <div className='mt-10 text-2xl md:text-5xl text-center md:leading-loose'> 
                 Hello <span className="self-center whitespace-nowrap text-3xl md:text-6xl font-bold dark:text-white">Prime<span className="font-bold text-blue-600">Reads</span></span>, <br /> 

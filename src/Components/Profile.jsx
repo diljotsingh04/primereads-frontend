@@ -121,7 +121,7 @@ const Profile = () => {
     }
 
     return (
-        <form className="mb-16" onSubmit={handleSubmit}>
+        <form className="mb-16 h-[100vh]" onSubmit={handleSubmit}>
             <div className="flex justify-center flex-col items-center">
                 <div className="text-3xl font-bold">Profile</div>
                 <input className="hidden" type="file" accept="image/*" onChange={handleFileChange} ref={filePickerRef} />
@@ -180,7 +180,7 @@ const Profile = () => {
                         <span className="font-medium">Alert!</span> {formSubmissionError}
                     </Alert>}
                 </div>
-                <Button className="bg-blue-600 mt-4 enabled:hover:bg-blue-700 w-[100%]" type="submit" disabled={hasChange}>Update Profile</Button>
+                <Button className="bg-blue-600 mt-4 enabled:hover:bg-blue-700 w-[100%] dark:bg-blue-600 dark:enabled:hover:bg-blue-700" type="submit" disabled={hasChange}>Update Profile</Button>
             </div>
         </form>
     )

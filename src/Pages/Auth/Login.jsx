@@ -57,13 +57,13 @@ const Login = () => {
     }
     
     return (
-        <div className="flex justify-center items-center min-h-[80vh] flex-col md:flex-row md:mx-20 gap-5">
+        <div className="flex justify-center items-center min-h-[100vh] flex-col md:flex-row md:mx-20 gap-5">
             <div className="w-[50%] flex justify-center flex-col">
                 <div className="text-4xl md:text-5xl">Prime<span className="text-blue-600">Reads</span></div>
                 <div className="text-base md:text-2xl">Login now to read recent blogs</div>
             </div>
             <div className="w-[50%]">
-                <div className="border border-gray-800 rounded-xl md:w-96">
+                <div className="border border-gray-800 dark:border-white rounded-xl md:w-96">
                     <form className="p-3 flex md:max-w-md flex-col gap-4 md:p-8" onSubmit={handleSubmit}>
                         {failureMessage && <Alert color="failure">
                             <span className="font-medium">Alert!</span> {failureMessage}
@@ -81,7 +81,7 @@ const Login = () => {
                                 </div>
                                 <TextInput onChange={handleChange} id="password" type="password" placeholder="Enter your password" required shadow />
                             </div>
-                            <Button className="bg-blue-600 mt-4 enabled:hover:bg-blue-700 w-[100%]" type="submit">Login</Button>
+                            <Button className="bg-blue-600 mt-4 enabled:hover:bg-blue-700 w-[100%] dark:bg-blue-600 dark:enabled:hover:bg-blue-700" type="submit">Login</Button>
                             <OAuth setFailureMessage={setFailureMessage}/>
                             <div className="flex items-center">
                                 <Label htmlFor="agree" className="flex mt-2">

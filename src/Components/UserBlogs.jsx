@@ -81,7 +81,7 @@ const UserBlogs = () => {
                         </div>
                         }
                         <div className="flex justify-center mb-4">
-                            {blogs.length != totalBlogs && <button onClick={handleShowMore} >Show more</button>}
+                            {blogs.length != totalBlogs && <button className='border-2 border-black rounded-full px-3 py-0.5 hover:animate-bounce hover:bg-blue-700 hover:border-blue-700 hover:text-white focus:ring-2 dark:border-gray-300' onClick={handleShowMore} >Show more</button>}
                         </div>
                     </>
                 )

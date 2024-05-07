@@ -75,11 +75,11 @@ const AddBalance = () => {
 
     return (
         <>
-            <div className="mt-[5rem] flex justify-center flex-col items-center">
+            <div className="pt-[5rem] flex justify-center flex-col items-center">
                 <div className="text-center">
                     <div className="text-xl">Your current balance is:</div>
                 </div>
-                <div className="border border-black rounded-md w-48 h-24 flex justify-center items-center mt-4">
+                <div className="border border-black dark:border-gray-400 rounded-md w-48 h-24 flex justify-center items-center mt-4">
                     <pre className="font-bold text-xl">Tokens: </pre>
                     <div className="text-xl">{curBalance.amount}</div>
                 </div>
@@ -95,7 +95,7 @@ const AddBalance = () => {
                                 <RadioPrice key={button.name} radioPriceButtons={button} price={price} setPrice={setPrice} />
                             )}
                         </div>
-                        <Button onClick={handleBuyNow} className="bg-blue-600 mt-4 enabled:hover:bg-blue-700 w-[100%]" type="button" disabled={!price.name}>Buy Now</Button>
+                        <Button onClick={handleBuyNow} className="bg-blue-600 mt-4 enabled:hover:bg-blue-700 w-[100%] dark:bg-blue-600 dark:enabled:hover:bg-blue-700" type="button" disabled={!price.name}>Buy Now</Button>
                     </div>
                 </div>
                 <div className="my-4 border border-gray w-[80%]"></div>

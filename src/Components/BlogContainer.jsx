@@ -80,7 +80,7 @@ const BlogContainer = ({ blog, showEdit, unlocked }) => {
     }
 
     return (
-        <div className={`border border-black mx-3 mb-3 ${showEdit !== true ? "h-[23rem]" : "h-[25rem]"} w-[20rem] rounded-lg overflow-hidden md:w-[80%] md:h-[15rem] md:flex relative`}>
+        <div className={`border border-black dark:border-white mx-3 mb-3 ${showEdit !== true ? "h-[23rem]" : "h-[25rem]"} w-[20rem] rounded-lg overflow-hidden md:w-[80%] md:h-[15rem] md:flex relative`}>
             {/* image */}
             <div className="h-[45%] md:h-[100%] md:w-[250px] md:min-w-[250px] md:border-r">
                 <img className="h-full w-full object-cover" src={blog.image} />
@@ -92,7 +92,7 @@ const BlogContainer = ({ blog, showEdit, unlocked }) => {
                     {blog.title}
                 </div>
                 {/* description */}
-                <div className="text-sm mt-1 mx-2 px-3 py-1 md:pr-8 line-clamp-2 text-justify text-gray-600 hover:text-black">
+                <div className="text-sm mt-1 px-3 py-1 md:pr-8 line-clamp-2 text-justify text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-gray-300">
                     {strippedContent(blog.content)}
                 </div>
                 {/* hashtag */}
@@ -101,7 +101,7 @@ const BlogContainer = ({ blog, showEdit, unlocked }) => {
                     <div className="flex justify-center gap-1">
                         {blog.hashtags.length >= 1 && <Hashtag value={blog.hashtags[0]} />}
                         {blog.hashtags.length >= 2 && <Hashtag value={blog.hashtags[1]} />}
-                        {blog.hashtags.length >= 3 && <Link to={`/blog/${blog._id}`} ><div className="text-xs ml-[-10px] text-gray-500 items-center px-3 hover:text-black">
+                        {blog.hashtags.length >= 3 && <Link to={`/blog/${blog._id}`} ><div className="text-xs ml-[-10px] text-gray-500 items-center px-3 hover:text-black dark:text-gray-300">
                             ...more
                         </div> </Link>}
                     </div>
@@ -120,7 +120,7 @@ const BlogContainer = ({ blog, showEdit, unlocked }) => {
                     </div>
                 </div>
                 {showEdit && <div className="mx-4">
-                    <button onClick={() => navigate(`/blog/edit/${blog._id}`)} className="border py-1 m-2 border-black rounded-lg px-3 bg-gray-900 text-white hover:bg-black hover:ring-1 focus:ring-2">Edit Blog</button>
+                    <button onClick={() => navigate(`/blog/edit/${blog._id}`)} className="border py-1 m-2 border-black rounded-lg px-3 bg-gray-900 text-white hover:bg-black hover:ring-1 focus:ring-2 dark:border-gray-300 dark:bg-slate-800">Edit Blog</button>
                 </div>} 
                 {curUser.id === blog.refTo && <div className="absolute bottom-2 right-3 text-xs text-gray-500">You are the owner of this blog</div>}
             </div>

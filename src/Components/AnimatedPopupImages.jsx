@@ -7,7 +7,7 @@ export const AnimatedPopupImages = ({images}) => {
 
     return (
         <>
-        <section className="bg-white overflow-hidden">
+        <section className="bg-white overflow-hidden dark:bg-gray-900">
             <div className="2xl:max-w-screen-3xl px-8 md:px-8 mx-5 mt-1 py-12 lg:py-24 space-y-18 h-svh flex flex-col justify-center">
             <div className="w-11/12 flex flex-col md:flex-row mx-auto">
                 {images.map((image) => {

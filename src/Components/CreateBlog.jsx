@@ -154,19 +154,20 @@ const CreateBlog = () => {
                         </div>
                         <TagsInput
                             onChange={(value) => { setblogData({ ...blogData, hashtags: value }) }}
-                            name="fruits"
+                            name="tags"
                             placeHolder="Enter your hashtags"
                             id="hashtags"
+                            className="bg-gray-900"
                         />
                     </div>
                     <div className=" mt-3">
                         <div className="mb-2 block mt-3">
                             <Label htmlFor="image" value="Choose your image" />
                         </div>
-                        <div className="flex border px-3 py-3 border-black flex-col">
+                        <div className="flex border px-3 py-3 border-black flex-col dark:border-gray-300 rounded-lg">
                             <div className="flex justify-between">
                                 <input type="file" accept="image/*" onChange={(e) => setfile(e.target.files[0])} />
-                                <Button className=" bg-blue-600 enabled:hover:bg-blue-700 w-[8rem]" onClick={handleUploadImage} disabled={imageFile === null}>{uploadingStart ? `${imageFileUploadingProgress} %` : "Upload Image"}</Button>
+                                <Button className=" bg-blue-600 enabled:hover:bg-blue-700 w-[8rem] dark:bg-blue-600 dark:enabled:hover:bg-blue-700" onClick={handleUploadImage} disabled={imageFile === null}>{uploadingStart ? `${imageFileUploadingProgress} %` : "Upload Image"}</Button>
                             </div>
                             {imageFileUrl && <img className="border border-black mt-4 h-80 w-full object-cover " src={imageFileUrl} alt="" />}
                         </div>
@@ -178,7 +179,7 @@ const CreateBlog = () => {
                         <div className="mb-2 block mt-3">
                             <Label htmlFor="content" value="Your content" />
                         </div>
-                        <ReactQuill className="h-72" modules={module} theme="snow" value={blogData.content} id="content" onChange={(value) => { setblogData({ ...blogData, content: value })}} placeholder="Write Something..." />
+                        <ReactQuill  className="h-72" modules={module} theme="snow" value={blogData.content} id="content" onChange={(value) => { setblogData({ ...blogData, content: value })}} placeholder="Write Something..." />
                     </div>
                     <div className=" my-[5rem]">
                         {formSubmitionError && <Alert className="my-3" color="failure">
@@ -199,7 +200,7 @@ const CreateBlog = () => {
 
                         <div className='h-5'></div>
 
-                        <Button className="bg-blue-600 enabled:hover:bg-blue-700 w-[100%]" type="submit" >Publish Blog</Button>
+                        <Button className="bg-blue-600 mt-4 enabled:hover:bg-blue-700 w-[100%] dark:bg-blue-600 dark:enabled:hover:bg-blue-700" type="submit" >Publish Blog</Button>
                     </div>
                 </form>
             </div>

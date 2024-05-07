@@ -2,17 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
       margin: 0;
       padding: 0;
 }
-.ql-editor{
+
+.ql-editor {
       font-size: 1.05rem;
 }
-.ql-syntax{
+
+.ql-syntax {
       background-color: #1e293b;
       margin: 2px;
       padding: 10px;
       border-radius: 10px;
       color: white;
+}
+.dark .ql-snow .ql-editor pre.ql-syntax{
+      background-color: #1e293b;
+}
+.dark .ql-stroke{
+      stroke: white;
+} 
+.dark .ql-picker{
+      color: white;
+}
+.dark .ql-picker-label{
+      color: white;
+} 
+.dark .ql-fill{
+      fill: white;
+}
+.dark .ql-picker-options{
+      background: rgb(55 65 81);
+}
+.dark .ql-picker-items::before{
+      color: white;
+}
+
+/* hashtag */
+
+.dark .rti--container {
+      --rti-bg: rgb(17 24 39);
+}
+
+.dark .rti--tag {
+      background: rgb(55 65 81);
+}
+
+.dark .rti--input {
+      background: rgb(55 65 81);
+}
+
+.dark .rti--input::placeholder {
+      color: #ccc;
 }

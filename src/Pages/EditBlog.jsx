@@ -186,8 +186,8 @@ const EditBlog = () => {
 
     return (
         <>
-        <div className="flex flex-col m-5 w-full h-[120vh] mt-[5rem] pb-10">
-            <div className="text-3xl font-bold text-center">Create Blog</div>
+        <div className="flex flex-col w-full pt-[5rem] pb-10">
+            <div className="text-3xl font-bold text-center">Edit Blog</div>
             <div className="mx-14 px-5">
                 <form onSubmit={handleSubmit}>
                     <div>
@@ -215,7 +215,7 @@ const EditBlog = () => {
                         <div className="flex border px-3 py-3 border-black flex-col">
                             <div className="flex justify-between">
                                 <input type="file" accept="image/*" onChange={(e) => setfile(e.target.files[0])} />
-                                <Button className=" bg-blue-600 enabled:hover:bg-blue-700 w-[8rem]" onClick={handleUploadImage} disabled={imageFile === null}>{uploadingStart ? `${imageFileUploadingProgress} %` : "Upload Image"}</Button>
+                                <Button className=" bg-blue-600 enabled:hover:bg-blue-700 w-[8rem] dark:bg-blue-600 dark:enabled:hover:bg-blue-700" onClick={handleUploadImage} disabled={imageFile === null}>{uploadingStart ? `${imageFileUploadingProgress} %` : "Upload Image"}</Button>
                             </div>
                             {(blogData.image || imageFileUrl) && <img className="border border-black mt-4 h-80 w-full object-cover " src={blogData.image || imageFileUrl} alt="" />}
                         </div>
@@ -245,7 +245,7 @@ const EditBlog = () => {
                                 </div>
                             </Alert>
                         )}
-                        <Button className="bg-blue-600 enabled:hover:bg-blue-700 w-[100%]" type="submit">Update Blog</Button>
+                        <Button className="bg-blue-600 mt-4 enabled:hover:bg-blue-700 w-[100%] dark:bg-blue-600 dark:enabled:hover:bg-blue-700" type="submit">Update Blog</Button>
                         <div className='h-10'></div>
                     </div>
                 </form>

@@ -7,13 +7,16 @@ import { persistor, store } from './Redux/store.js'
 import { Provider } from 'react-redux'
 // persist store
 import { PersistGate } from 'redux-persist/integration/react';
+import ThemeProvider from './Components/LDToggler/ThemeProvider.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <React.StrictMode>
+    // <React.StrictMode>
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <App />
-      </PersistGate>
+        <PersistGate loading={null} persistor={persistor}>
+            <ThemeProvider>
+                <App />
+            </ThemeProvider>
+        </PersistGate>
     </Provider>
-  // </React.StrictMode>,
+    // </React.StrictMode>,
 )

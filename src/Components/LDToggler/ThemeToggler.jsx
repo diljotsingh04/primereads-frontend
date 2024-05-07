@@ -1,32 +1,35 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
-import './Toggle.css'; 
+import { useDispatch, useSelector } from 'react-redux';
+import './Toggle.css';
+import { toggleTheme } from '../../Redux/Slices/themeSlice';
 
 const ThemeToggler = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
 
-  const handleToggle = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-  console.log(isDarkMode)
+    const dispatch = useDispatch();
+    const { theme } = useSelector(state => state.theme);
 
-  return (
-    <div>
-      <input
-        type="checkbox"
-        className="checkbox"
-        id="checkbox"
-        checked={isDarkMode}
-        onChange={handleToggle}
-      />
-      <label htmlFor="checkbox" className="checkbox-label">
-        <FontAwesomeIcon icon={faMoon} className="moon-icon" />
-        <FontAwesomeIcon icon={faSun} className="sun-icon" />
-        <span className="ball"></span>
-      </label>
-    </div>
-  );
+    const handleToggle = () => {
+        dispatch(toggleTheme());
+    };
+
+    return (
+        <div>
+            <input
+                type="checkbox"
+                className="checkbox"
+                id="checkbox"
+                checked={theme === 'dark'}
+                onChange={handleToggle}
+            />
+            <label htmlFor="checkbox" className="checkbox-label">
+                <FontAwesomeIcon icon={faMoon} className="moon-icon" />
+                <FontAwesomeIcon icon={faSun} className="sun-icon" />
+                <span className="ball"></span>
+            </label>
+        </div>
+    );
 };
 
 export default ThemeToggler;

@@ -70,7 +70,7 @@ const UserBlogs = () => {
     }
 
     return (
-        <div>
+        <div className="min-h-[95vh]">
             <div className="text-3xl font-bold text-center">MyBlogs</div>
             {blogs ?
                 (

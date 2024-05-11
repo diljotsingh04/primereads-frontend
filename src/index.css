@@ -7,6 +7,7 @@
       padding: 0;
 }
 
+/* quill editor */
 .ql-editor {
       font-size: 1.05rem;
 }
@@ -18,25 +19,36 @@
       border-radius: 10px;
       color: white;
 }
-.dark .ql-snow .ql-editor pre.ql-syntax{
+
+.dark .ql-editor[data-placeholder]:before {
+      color: rgb(209 213 219);
+}
+
+.dark .ql-snow .ql-editor pre.ql-syntax {
       background-color: #1e293b;
 }
-.dark .ql-stroke{
+
+.dark .ql-stroke {
       stroke: white;
-} 
-.dark .ql-picker{
+}
+
+.dark .ql-picker {
       color: white;
 }
-.dark .ql-picker-label{
+
+.dark .ql-picker-label {
       color: white;
-} 
-.dark .ql-fill{
+}
+
+.dark .ql-fill {
       fill: white;
 }
-.dark .ql-picker-options{
+
+.dark .ql-picker-options {
       background: rgb(55 65 81);
 }
-.dark .ql-picker-items::before{
+
+.dark .ql-picker-items::before {
       color: white;
 }
 

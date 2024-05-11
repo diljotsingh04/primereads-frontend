@@ -55,6 +55,7 @@ const DetailedBlog = () => {
         )
     }
 
+    console.log(blog.content)
     return (
         <>
             <div className="flex justify-center flex-col item-center pt-[5rem] mb-10">

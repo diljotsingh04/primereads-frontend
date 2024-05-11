@@ -8,6 +8,13 @@
 }
 
 /* quill editor */
+
+ol li {
+      list-style: decimal;
+      list-style-position: inside;
+      padding-left: 10px;
+}
+
 .ql-editor {
       font-size: 1.05rem;
 }

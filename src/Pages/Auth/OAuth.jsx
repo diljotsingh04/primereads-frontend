@@ -40,7 +40,7 @@ const OAuth = ({setFailureMessage, refer, prevUserId}) => {
                 // add bonus logic starts
                 if(refer && res.data.newUser){
                     try {
-                        const addBonus = await axios.put('http://localhost:3000/auth/refer',
+                        const addBonus = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/auth/refer`,
                             {
                                 prevuserid: prevUserId,
                                 curuserid: res.data._id

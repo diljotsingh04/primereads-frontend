@@ -96,7 +96,7 @@ const Profile = () => {
         setFormSubmissionSuccess(null);
 
         try {
-            const updateProfile = await axios.put(`http://localhost:3000/auth/update`,
+            const updateProfile = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/auth/update`,
                 updatedData,
                 {
                     headers: {

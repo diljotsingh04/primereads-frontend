@@ -111,7 +111,7 @@ const CreateBlog = () => {
         }
 
         try {
-            const createBlog = await axios.post('http://localhost:3000/posts/addblog',
+            const createBlog = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/posts/addblog`,
                 blogData,
                 {
                     headers: {

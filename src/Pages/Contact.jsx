@@ -31,7 +31,7 @@ const Contact = () => {
         setfailure(null);
         setSuccess(null);
         try {
-            const addFormData = await axios.post('http://localhost:3000/posts/contactus',
+            const addFormData = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/posts/contactus`,
                 formData,
                 {
                     headers: {

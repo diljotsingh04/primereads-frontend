@@ -7,7 +7,7 @@ const ClearCookie = () => {
 
     useEffect(() => {
         const clearApiReq = async () => {
-            const clearData = await axios.get("http://localhost:3000/clearcookie",
+            const clearData = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/clearcookie`,
                 {
                     headers: {
                         'Content-Type': 'application/json',

@@ -35,7 +35,7 @@ const SignUp = () => {
       }
 
       try {
-         const createUser = await axios.post('http://localhost:3000/auth/signup',
+         const createUser = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/signup`,
             signupData,
             {
                headers: {

@@ -17,7 +17,7 @@ const UserBlogs = () => {
 
         const fetchData = async () => {
             try {
-                const getResult = await axios.post(`http://localhost:3000/posts/getpost?userId=${curUser.id}`,
+                const getResult = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/posts/getpost?userId=${curUser.id}`,
                     {},
                     {
                         headers: {
@@ -47,7 +47,7 @@ const UserBlogs = () => {
     const handleShowMore = async() => {
 
         try {
-            const getResult = await axios.post(`http://localhost:3000/posts/getpost?startIndex=${blogs.length}&userId=${curUser.id}`,
+            const getResult = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/posts/getpost?startIndex=${blogs.length}&userId=${curUser.id}`,
                 {},
                 {
                     headers: {

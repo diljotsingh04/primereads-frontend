@@ -46,7 +46,7 @@ const AddBalance = () => {
             products: [price]
         }
         try {
-            const response = await axios.post('http://localhost:3000/auth/stripe-checkout-session',
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/stripe-checkout-session`,
                 body,
                 {
                     headers: {

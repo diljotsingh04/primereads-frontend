@@ -18,7 +18,7 @@ const UnlockedBlogs = () => {
 
         const fetchData = async () => {
             try {
-                const getResult = await axios.post('http://localhost:3000/posts/getunlockedblogs',
+                const getResult = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/posts/getunlockedblogs`,
                     {},
                     {
                         headers: {

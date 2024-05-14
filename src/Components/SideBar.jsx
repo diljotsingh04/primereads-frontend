@@ -15,7 +15,7 @@ const SideBar = () => {
     const navigate = useNavigate();
 
     const handleLogout = async () => {
-        const logoutUser = await axios.get('http://localhost:3000/auth/logout',
+        const logoutUser = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/auth/logout`,
             {
                 headers: {
                     'Content-Type': 'application/json',

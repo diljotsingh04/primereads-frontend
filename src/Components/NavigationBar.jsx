@@ -21,7 +21,7 @@ const NavigationBar = () => {
         if (user.id) {
             const fetchData = async () => {
                 try {
-                    const getBalance = await axios.get(`http://localhost:3000/auth/getuserdata/${user.id}`,
+                    const getBalance = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/auth/getuserdata/${user.id}`,
                         {
                             headers: {
                                 'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ const NavigationBar = () => {
 
 
     const handleLogout = async () => {
-        const logoutUser = await axios.get('http://localhost:3000/auth/logout',
+        const logoutUser = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/auth/logout`,
             {
                 headers: {
                     'Content-Type': 'application/json',

@@ -17,7 +17,7 @@ const MyBlogs = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const getResult = await axios.post('http://localhost:3000/posts/getpost',
+                const getResult = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/posts/getpost`,
                     {},
                     {
                         headers: {
@@ -47,7 +47,7 @@ const MyBlogs = () => {
     const handleShowMore = async () => {
 
         try {
-            const getResult = await axios.post(`http://localhost:3000/posts/getpost?startIndex=${blogs.length}`,
+            const getResult = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/posts/getpost?startIndex=${blogs.length}`,
                 {},
                 {
                     headers: {

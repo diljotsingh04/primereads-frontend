@@ -46,7 +46,7 @@ const EditBlog = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const getResult = await axios.post(`http://localhost:3000/posts/getpost?postId=${postId}`,
+                const getResult = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/posts/getpost?postId=${postId}`,
                     {},
                     {
                         headers: {
@@ -147,7 +147,7 @@ const EditBlog = () => {
         }
 
         try {
-            const editBlog = await axios.post('http://localhost:3000/posts/editblog',
+            const editBlog = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/posts/editblog`,
                 blogData,
                 {
                     headers: {

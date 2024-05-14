@@ -39,7 +39,7 @@ const BlogContainer = ({ blog, showEdit, unlocked }) => {
             }).then(async (result) => {
                 if (result.isConfirmed) {
                     try {
-                        const unlockBlog = await axios.post(`http://localhost:3000/auth/unlockpost/${id}`,
+                        const unlockBlog = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/unlockpost/${id}`,
                             {},
                             {
                                 headers: {

@@ -31,7 +31,7 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const loginUser = await axios.post('http://localhost:3000/auth/signin',
+            const loginUser = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/signin`,
                 loginData,
                 {
                     headers: {

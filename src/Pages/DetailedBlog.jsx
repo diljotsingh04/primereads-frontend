@@ -19,7 +19,7 @@ const DetailedBlog = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const getResult = await axios.post(`http://localhost:3000/posts/readblog?postId=${blogId}`,
+                const getResult = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/posts/readblog?postId=${blogId}`,
                     {},
                     {
                         headers: {

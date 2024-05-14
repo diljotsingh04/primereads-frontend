@@ -5,6 +5,7 @@ import { Footer } from "../Components/Footer";
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Loading from '../Components/Loading';
+import { FaUnlockAlt } from "react-icons/fa";
 
 const MyBlogs = () => {
 
@@ -71,7 +72,7 @@ const MyBlogs = () => {
     return (
         <>
             <div className="flex justify-center text-3xl font-bold pt-[6rem]">BLOGS</div>
-            {curUser.id && <Link to="/blogs/unlocked" className="flex justify-center items-center absolute right-5 top-[81px] w-[125px] h-10 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:ring-2">Unlocked Blogs</Link>}
+            {curUser.id && <Link to="/blogs/unlocked" className="flex justify-center items-center absolute right-5 top-[81px] h-10 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:ring-2 px-4"><span className="flex items-center gap-1 justify-center"><FaUnlockAlt />Unlocked Blogs</span></Link>}
             {blogs ?
                 (
                     <>

@@ -5,6 +5,9 @@ import Swal from 'sweetalert2';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios'
 import { decrementBalance } from '../Redux/Slices/balanceSlice';
+import { SiReadthedocs } from "react-icons/si";
+import { IoIosLock } from "react-icons/io";
+import { FaEdit } from "react-icons/fa";
 
 const BlogContainer = ({ blog, showEdit, unlocked }) => {
     const navigate = useNavigate();
@@ -111,16 +114,12 @@ const BlogContainer = ({ blog, showEdit, unlocked }) => {
                     <div className="text-sm">
                         {dateSimplifier(blog.updatedAt)}
                     </div>
-                    {/* uplock button */}
-                    {/* <div>
-                        <button onClick={() => readMoreHandler(blog._id)} className="border border-black rounded-lg px-2 bg-blue-500 text-white">Read More</button>
-                    </div> */}
                     <div>
-                        <button onClick={() => { (blog.unlocked || blog.isOwner) ? readMoreHandler(blog._id) : handleUnlock(blog._id) }} className="border border-black rounded-lg py-1 px-2 mx-3 bg-blue-600 text-white hover:bg-blue-700 focus:ring-2">{(blog.unlocked || blog.isOwner) ? "Read More" : "Unlock Blog"}</button>
+                        <button onClick={() => { (blog.unlocked || blog.isOwner) ? readMoreHandler(blog._id) : handleUnlock(blog._id) }} className="border border-black rounded-lg py-1 px-2 mx-3 bg-blue-600 text-white hover:bg-blue-700 focus:ring-2">{(blog.unlocked || blog.isOwner) ? <span className="flex items-center gap-1 justify-center"><SiReadthedocs />Read More</span> : <span className="flex items-center gap-1 justify-center"><IoIosLock />Unlock Blog</span>}</button>
                     </div>
                 </div>
                 {showEdit && <div className="mx-4">
-                    <button onClick={() => navigate(`/blog/edit/${blog._id}`)} className="border py-1 m-2 border-black rounded-lg px-3 bg-gray-900 text-white hover:bg-black hover:ring-1 focus:ring-2 dark:border-gray-300 dark:bg-slate-800">Edit Blog</button>
+                    <button onClick={() => navigate(`/blog/edit/${blog._id}`)} className="border py-1 m-2 border-black rounded-lg px-3 bg-gray-900 text-white hover:bg-black hover:ring-1 focus:ring-2 dark:border-gray-300 dark:bg-slate-800"><span className="flex items-center gap-1 justify-center"><FaEdit />Edit Blog</span></button>
                 </div>} 
                 {curUser.id === blog.refTo && <div className="absolute bottom-2 right-3 text-xs text-gray-500">You are the owner of this blog</div>}
             </div>

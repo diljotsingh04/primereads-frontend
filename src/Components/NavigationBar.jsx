@@ -6,6 +6,7 @@ import { removeUser } from '../Redux/Slices/userSlice';
 import { setBalance } from '../Redux/Slices/balanceSlice';
 import axios from 'axios';
 import ThemeToggler from './LDToggler/ThemeToggler';
+import TokenImage from '../assets/images/token.png'
 
 const NavigationBar = () => {
 
@@ -75,8 +76,13 @@ const NavigationBar = () => {
                 {user.id ?
                     <>
                         <Link to="/tokens/addbalance"><div className="hidden border border-black dark:border-gray-400 rounded-md py-1 px-2 md:block">
-                            <span>Tokens: </span>
-                            <span>{token.amount}</span>
+                            <div className="flex">
+                                <img src={TokenImage} alt="tokenImage" className="h-6"/>
+                                <div>
+                                    <span>Tokens: </span>
+                                    <span>{token.amount}</span>
+                                </div>
+                            </div>
                         </div></Link>
 
                         <Dropdown

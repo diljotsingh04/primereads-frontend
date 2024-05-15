@@ -34,6 +34,7 @@ const NavigationBar = () => {
                         dispatch(setBalance(getBalance.data.balance));
                     }
                     else {
+                        console.log(getBalance.data.message)
                         console.log('Failed to fetch token balance')
                     }
 

@@ -56,7 +56,7 @@ const UnlockedBlogs = () => {
                             You don't have any unlocked blogs yet
                         </div>
                         :
-                        blogs && <div className="flex justify-center mx-4 mt-7 gap-2 flex-wrap md:flex-col md:items-center">
+                        blogs && <div className="flex justify-center mx-4 mt-7 gap-2 flex-wrap md:flex-col md:items-center min-h-[50vh]">
                             {blogs.map(blog => <BlogContainer key={blog._id} blog={blog} />)}
                         </div>
                         }

@@ -12,7 +12,7 @@ const AddBalance = () => {
     const curUser = useSelector(state => state.user);
 
     const [copied, setCopied] = useState(false);
-    const [value, setvalue] = useState("http://localhost:5173" + "/refer/" + curUser.id)
+    const [value, setvalue] = useState("https://primereads.vercel.app" + "/refer/" + curUser.id)
     const [price, setPrice] = useState({ name: null, price: null });
     const [radioPriceButtons, setradioPriceButtons] = useState([
         {
